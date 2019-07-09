@@ -56,14 +56,14 @@ gulp.task('tile-js-imports', function(cb) {
       console.log(e);
       cb();
     })
-    .pipe(gulp.dest('./urbit/app/smol/js/'))
+    .pipe(gulp.dest('./urbit/app/%APPNAME%/js/'))
     .on('end', cb);
 });
 
 gulp.task('tile-js-minify', function () {
-  return gulp.src('./urbit/app/smol/js/tile.js')
+  return gulp.src('./urbit/app/%APPNAME%/js/tile.js')
     .pipe(minify())
-    .pipe(gulp.dest('./urbit/app/smol/js/'));
+    .pipe(gulp.dest('./urbit/app/%APPNAME%/js/'));
 });
 
 gulp.task('urbit-copy', function () {
