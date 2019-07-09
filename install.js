@@ -26,5 +26,6 @@ prompt.get([{
         }
         replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
         replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
+        console.log("All done! Happy hacking.")
     }
 )
