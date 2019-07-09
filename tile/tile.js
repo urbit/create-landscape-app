@@ -170,4 +170,4 @@ export default class %APPNAME%Tile extends Component {
 
 }
 
-window.smolTile = %APPNAME%Tile;
+window.%APPNAME%Tile = %APPNAME%Tile;
