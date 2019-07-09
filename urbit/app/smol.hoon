@@ -40,14 +40,14 @@
   |=  old=(unit ~)
   ^-  (quip move _this)
   =/  launcha
-    [%launch-action [%%APPNAME% /tile '/~%APPNAME%/js/tile.js']]
+    [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
   :_  this
   :~
     [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
     [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
   ==
 ::
-++  peer-tile
+++  peer-%APPNAME%tile
   |=  pax=path
   ^-  (quip move _this)
   [[ost.bol %diff %json *json]~ this]
@@ -55,7 +55,7 @@
 ++  send-tile-diff
   |=  jon=json
   ^-  (list move)
-  %+  turn  (prey:pubsub:userlib /tile bol)
+  %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
   |=  [=bone ^]
   [bone %diff %json jon]
 ::
