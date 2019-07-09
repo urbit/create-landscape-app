@@ -14,7 +14,7 @@ prompt.get([{
     description: "Where is your Urbit pier located? For example, '/Users/dev/zod/home'"
     }], function (err, result) {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-        let capitalisedAppName = result.appName.charAt(0).toUpperCase() + result.appName.slice(1) + "Tile"
+        let capitalisedAppName = result.appName.charAt(0).toUpperCase() + result.appName.slice(1)
         const appNameOptions = {
             files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon'],
             from: /%APPNAME%/g,
@@ -22,8 +22,8 @@ prompt.get([{
             }
         const appNamewithCapitals = {
             files: 'tile/tile.js',
-            from: [/%APPNAME%Tile/g, /%APPNAME%/g],
-            to: [capitalisedAppName, result.appName]
+            from: [/%APPNAME%/g, /%APPNAME%Tile/g],
+            to: [capitalisedAppName, result.appName + "Tile"]
         }
         const urbitPierOptions = {
             files: '.urbitrc',
