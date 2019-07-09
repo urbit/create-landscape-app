@@ -2,9 +2,9 @@
   "name": "create-modulo-app",
   "version": "0.1.0",
   "description": "Get started with a Modulo tile application.",
-  "main": "install.js",
+  "main": "node install.js",
   "scripts": {
-    "start": "install.js",
+    "start": "node install.js",
     "build": "gulp",
     "serve": "gulp watch"
   },
