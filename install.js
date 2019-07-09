@@ -22,7 +22,7 @@ prompt.get([{
             }
         const appNamewithCapitals = {
             files: 'tile/tile.js',
-            from: [/%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g]
+            from: [/%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g, /%APPNAME%/g],
             to: [capitalisedAppName, result.appName, capitalisedAppName, result.appName, capitalisedAppName]
         }
         const urbitPierOptions = {
