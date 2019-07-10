@@ -1,4 +1,5 @@
 Get started building a simple Modulo tile app for [Urbit](http://urbit.org) with a few commands.
+<p align="center"><img src="https://user-images.githubusercontent.com/20846414/60992419-52be2a80-a301-11e9-9daf-ef36d38725b5.gif"/></p>
 
 ## Installation
 
