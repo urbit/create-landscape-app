@@ -8,6 +8,8 @@ On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount
 
 ## Using
 
+Once you're up and running, your tile lives in `tile/tile.js`, which uses [React](https://reactjs.org) to render itself -- you'll want a basic foothold with it first. When you make changes, the `urbit` directory will update with the compiled application and, if you're running `npm run serve`, it will automatically copy itself to your Urbit ship when you save your changes (more information on that below).
+
 ### `npm start`
 
 This runs the wizard. Give it an application name and the location of your Urbit ship's pier and it will customise the files so your new application will run on your ship.
