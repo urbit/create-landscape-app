@@ -2,7 +2,7 @@ Get started building a simple Modulo tile app for [Urbit](http://urbit.org) with
 
 ## Installation
 
-Clone this repository and run `npm start`. In order to run your application on your ship, you will need Urbit v.0.8.0 or higher.
+Clone this repository, `npm install` and then run `npm start` to get started. In order to run your application on your ship, you will need Urbit v.0.8.0 or higher.
 
 On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount %`.
 
