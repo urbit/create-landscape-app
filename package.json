@@ -9,7 +9,8 @@
     "serve": "gulp watch"
   },
   "author": "Matilde Park",
-  "license": "CC0",
+  "license": "MIT",
+  "repository": "https://github.com/matildepark/create-modulo-app",
   "devDependencies": {
     "@sucrase/gulp-plugin": "^2.0.0",
     "gulp": "^4.0.0",
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "fsevents": "^1.2.9",
     "prompt": "^1.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
