@@ -9,7 +9,18 @@ prompt.get([{
     name: 'appName',
     required: true,
     description: "What's the name of your application? Lowercase and no spaces, please."
-    }, {
+    }, 
+    {
+    name: 'type',
+    required: true,
+    description: "Is your app just a tile, or a full application? (tile/full)",
+    message: "Please specify 'tile' or 'full'.",
+    conform: function(value) {
+        if ((value == "tile") || (value == "full")) return true
+        return false
+        }
+    },
+    {
     name: 'pier',
     required: true,
     description: "Where is your Urbit pier located? For example, '/Users/dev/zod/home'"
