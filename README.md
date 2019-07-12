@@ -33,4 +33,8 @@ The future is a wonderful place that will include this functionality. Imagine.
 
 ### What if I want to communicate with my ship / provide more functionality besides a front-end?
 
-You can certainly do that, if you know [Hoon](https://urbit.org/docs/learn/hoon/). This is intended to be a boilerplate for rapid front-end development specifically; alternatively, it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Modulo interface.
+By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourAppName]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Modulo interface.
+
+In order to do anything substantial, of course, you'll want to know [Hoon](https://urbit.org/docs/learn/hoon/). If this is intimidating, don't panic: `create-modulo-app` is a fantastic way to start learning by leveraging your strengths. This repository is intended to be a boilerplate for rapid front-end development; it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Modulo interface.
+
+Happy hacking!
