@@ -3,6 +3,7 @@ const replace = require('replace-in-file')
 const fs = require('fs')
 
 prompt.colors = false
+prompt.message = ""
 
 prompt.get([{
     name: 'appName',
