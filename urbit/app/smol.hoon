@@ -51,13 +51,19 @@
     [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
     [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
   ==
-:: This allows other apps (or the wider internet) to subscribe to this app.
-:: It sends a bunted JSON type (*json) because in this application there is no state to send.
-:: If you have a state, you won't send a bunted JSON type.
+::
+:: peer-%APPNAME%tile allows other apps (or the wider internet) to subscribe to this app.
+:: In this example, it sends "our.bol" (our ship's name) as a JSON string to our React.js file.
+:: If you have nothing to send to the tile -- if the tile has nothing to receive from your ship --
+:: you'll want to "bunt" (sending a blank with *) the JSON: delete line 62 and replace line 63 with
+:: [[ost.bol %diff %json *json]~ this]
+::
 ++  peer-%APPNAME%tile
   |=  pax=path
   ^-  (quip move _this)
-  [[ost.bol %diff %json *json]~ this]
+  =/  jon=json  [%s (crip (scow %p our.bol))]
+  [[ost.bol %diff %json jon]~ this]
+
 :: When this arm is called from this application, 
 :: it sends moves to every subscriber of this application's unique path.
 ++  send-tile-diff

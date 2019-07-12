@@ -12,7 +12,7 @@ class %APPNAME% extends Component {
 
   render() {
     return <div>
-    <p>Welcome to your app.</p>
+    <p>Welcome to your app, {this.props.data}.</p>
         </div>
   }
 }
@@ -37,7 +37,7 @@ export default class %APPNAME%Tile extends Component {
 
   render() {
     return this.renderWrapper((
-      <%APPNAME%/>
+      <%APPNAME% data={this.props.data}/>
     ));
 
   }
