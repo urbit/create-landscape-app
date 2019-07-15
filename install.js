@@ -81,7 +81,7 @@ const deleteFolderRecursive = function (path) {
 const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
-    fs.unlinkSync('/gulpfile.js')
+    fs.unlinkSync('gulpfile.js')
     mv('/full', '/', {mkdirp: true, clobber: true}, function(err) {
         try {
             fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
