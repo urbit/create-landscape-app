@@ -140,7 +140,7 @@ var moveDir = function (from_dir, to_dir, callback) {
                         ));
                     }
 
-                    return promiseAllWait(move_promises)
+                    return promiseAllWait(move_promises).then(callback)
                         .catch(function (err) {
                             var undo_move_promises = [];
                             for (var i_moved_record = 0; i_moved_record < moved_records.length; i_moved_record++) {
@@ -154,7 +154,7 @@ var moveDir = function (from_dir, to_dir, callback) {
                         });
                 }).then(function () {
                     return fs.rmdir(from_dir);
-                }).then(callback);
+                });
         });
 };
 
