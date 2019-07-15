@@ -164,24 +164,28 @@ const setupFull = function (result) {
     fs.unlinkSync('gulpfile.js')
     moveDir('full', './', function() {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-        moveDir('urbit/app/smol/', 'urbit/app/' + result.appName), function(err) {if (err) console.error(err)}
-        moveDir('urbit/mar/smol/', 'urbit/mar/' + result.appName), function (err) {if (err) console.error(err)}
-            fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
-            let urbitPierOptions = {
+        fs.rename('urbit/app/smol/', 'urbit/app/' + result.appName), function(err) {
+            if (err) console.error(err)
+            fs.rename('urbit/mar/smol/', 'urbit/mar/' + result.appName), function (err) {
+                if (err) console.error(err)
+                fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
+                let urbitPierOptions = {
                     files: '.urbitrc',
                     from: "%URBITPIER%",
                     to: result.pier
-            }
-            replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
-            let appNameOptions = {
-                files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon', 'tile/tile.js',
-                    'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                    'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
-                    'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon'
-                ],
-                from: /%APPNAME%/g,
-                to: result.appName
-            }
-            replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
+                }
+                replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
+                let appNameOptions = {
+                    files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon', 'tile/tile.js',
+                        'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
+                        'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
+                        'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon'
+                    ],
+                    from: /%APPNAME%/g,
+                    to: result.appName
+                }
+                replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
+            }        
+        }
     })
 }
