@@ -11,8 +11,13 @@ class %APPNAME% extends Component {
   }
 
   render() {
-    return <div>
-    <p>Welcome to your app, {this.props.data}.</p>
+    return <div className="w-100 h-100 relative" style={{ background: '#1a1a1a' }}>
+      <p className="gray" style={{
+        fontWeight: 'bold',
+        fontSize: 14,
+        lineHeight: '24px'
+      }}>%APPNAME%</p>
+    <p className="white">Welcome to your app, {this.props.data}.</p>
         </div>
   }
 }
