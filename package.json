@@ -38,6 +38,7 @@
     "moment": "^2.20.1",
     "mousetrap": "^1.6.1",
     "mv": "^2.1.1",
+    "promise": "^8.0.3",
     "prompt": "^1.0.0",
     "react": "^16.5.2",
     "react-custom-scrollbars": "^4.2.1",
