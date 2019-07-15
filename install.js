@@ -82,11 +82,11 @@ const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
     fs.unlinkSync('gulpfile.js')
-    fse.move('/full/*', '/', {mkdirp: true, clobber: true}, function(err) {
+    fse.move('/full', '/', function(err) {
         try {
             fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-            fse.move('urbit/app/smol/', 'urbit/app/' + result.appName, {mkdirp: true}, function(err) {})
-            fse.move('urbit/mar/smol/', 'urbit/mar/' + result.appName, { mkdirp: true }, function (err) {})
+            fse.move('urbit/app/smol/', 'urbit/app/' + result.appName, function(err) {})
+            fse.move('urbit/mar/smol/', 'urbit/mar/' + result.appName, function (err) {})
             fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
             let urbitPierOptions = {
                 files: '.urbitrc',
