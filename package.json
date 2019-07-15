@@ -1,16 +1,16 @@
 {
   "name": "create-modulo-app",
-  "version": "0.1.0",
-  "description": "Get started with a Modulo tile application.",
+  "version": "0.2.0",
+  "description": "Get started with a Modulo application.",
   "main": "node install.js",
   "scripts": {
     "start": "node install.js",
     "build": "gulp",
     "serve": "gulp watch"
   },
-  "author": "Matilde Park",
+  "author": "Tlon Corp",
   "license": "MIT",
-  "repository": "https://github.com/matildepark/create-modulo-app",
+  "repository": "https://github.com/urbit/create-modulo-app",
   "devDependencies": {
     "@joseph184/rollup-plugin-node-builtins": "^2.1.4",
     "@sucrase/gulp-plugin": "^2.0.0",
@@ -32,6 +32,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "fsevents": "^1.2.9",
+    "mv": "^2.1.1",
     "prompt": "^1.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

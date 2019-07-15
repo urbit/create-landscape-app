@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import { uuid } from '/lib/util';
 
 class UrbitApi {
   setAuthTokens(authTokens) {
@@ -35,12 +34,8 @@ class UrbitApi {
     this.action("hall", "hall-action", data);
   }
 
-  chat(lis) {
-    this.action("chat", "chat-action", {
-      actions: {
-        lis
-      }
-    });
+  %APPNAME%(data) {
+    this.action("%APPNAME%", "json", data);
   }
 
   action(appl, mark, data) {
@@ -54,92 +49,6 @@ class UrbitApi {
         });
     });
   }
-
-  notify(aud, bool) {
-    this.hall({
-      notify: {
-        aud,
-        pes: !!bool ? 'hear' : 'gone'
-      }
-    });
-  }
-
-  permit(cir, aud, message) {
-    this.hall({
-      permit: {
-        nom: cir,
-        sis: aud,
-        inv: true
-      }
-    });
-
-    if (message) {
-      this.invite(cir, aud);
-    }
-  }
-
-  unpermit(cir, ship) {
-    /*
-     * lol, never send an unpermit to yourself.
-     * it puts your ship into an infinite loop.
-     * */
-    if (ship === window.ship) {
-      return;
-    }
-    this.hall({
-      permit: {
-        nom: cir,
-        sis: [ship],
-        inv: false
-      }
-    });
-  }
-
-  invite(cir, aud) {
-    let audInboxes = aud.map((aud) => `~${aud}/i`);
-    let inviteMessage = {
-      aud: audInboxes,
-      ses: [{
-        inv: {
-          inv: true,
-          cir: `~${window.ship}/${cir}`
-        }
-      }]
-    };
-
-    this.hall({
-      phrase: inviteMessage
-    });
-  }
-
-  source(nom, sub) {
-    this.hall({
-      source: {
-        nom: "inbox",
-        sub: sub,
-        srs: [nom]
-      }
-    })
-  }
-
-  delete(nom) {
-    this.hall({
-      delete: {
-        nom,
-        why: ''
-      }
-    })
-  }
-
-  read(nom, red) {
-    this.hall({
-      read: {
-        nom,
-        red
-      }
-    })
-  }
 }
-
 export let api = new UrbitApi();
 window.api = api;

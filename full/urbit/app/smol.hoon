@@ -1,41 +1,41 @@
 /-  hall
-/+  *server, chat, hall-json
+/+  *server, %APPNAME%, hall-json
 /=  index
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/chat/index
+  /:  /===/app/%APPNAME%/index
   /|  /html/
       /~  ~
   ==
 /=  tile-js
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/chat/js/tile
+  /:  /===/app/%APPNAME%/js/tile
   /|  /js/
       /~  ~
   ==
 /=  script
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/chat/js/index
+  /:  /===/app/%APPNAME%/js/index
   /|  /js/
       /~  ~
   ==
 /=  style
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/chat/css/index
+  /:  /===/app/%APPNAME%/css/index
   /|  /css/
       /~  ~
   ==
 :: This iterates over item in the img directory, takes their filenames
 :: at @tas (knots), takes the file as @ (binary) and runs it through the 
 :: png mark.
-/=  chat-png
+/=  %APPNAME%-png
   /^  (map knot @)
-  /:  /===/app/chat/img  /_  /png/
+  /:  /===/app/%APPNAME%/img  /_  /png/
 ::
-=,  chat
+=,  %APPNAME%
 ::
 |_  [bol=bowl:gall sta=state]
 ::
@@ -47,19 +47,19 @@
   |=  old=(unit state)
   ^-  (quip move _this)
   =/  launcha/poke
-    [%launch-action [%chat /chattile '/~chat/js/tile.js']]
+    [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
   ?~  old
     :_  this
     :~ 
-        :: %connect here tells %eyre to mount at the /~chat endpoint.
-        [ost.bol %connect / [~ /'~chat'] %chat]
-        [ost.bol %poke /chat [our.bol %launch] launcha]
+        :: %connect here tells %eyre to mount at the /~%APPNAME% endpoint.
+        [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
+        [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
     ==
-  :-  [ost.bol %poke /chat [our.bol %launch] launcha]~
+  :-  [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]~
   this(sta u.old)
 ::
 ::
-++  peer-chattile
+++  peer-%APPNAME%tile
   |=  wir=wire
   ^-  (quip move _this)
   :_  this
@@ -73,25 +73,25 @@
   ^-  (quip move _this)
   [~ this]
 ::
-::  +poke-chat: send us an action
+::  +poke-%APPNAME%: send us an action
 ::
-++  poke-chat-action
-  |=  act=action:chat
+++  poke-%APPNAME%-action
+  |=  act=action:%APPNAME%
   ^-  (quip move _this)
   [~ this] 
 ::
-::  +send-chat-update: utility func for sending updates to all our subscribers
+::  +send-%APPNAME%-update: utility func for sending updates to all our subscribers
 ::
-++  send-chat-update
+++  send-%APPNAME%-update
   |=  [upd=update str=streams]
   ^-  (list move)
   =/  updates/(list move)
     %+  turn  (prey:pubsub:userlib /primary bol)
     |=  [=bone *]
-    [bone %diff %chat-update upd]
+    [bone %diff %%APPNAME%-update upd]
   ::
   =/  tile-updates/(list move)
-    %+  turn  (prey:pubsub:userlib /chattile bol)
+    %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
     |=  [=bone *]
     [bone %diff %json *json]
   ::
@@ -103,7 +103,7 @@
 ::  +lient arms
 ::
 ::
-::  +bound: lient tells us we successfully bound our server to the ~chat url
+::  +bound: lient tells us we successfully bound our server to the ~%APPNAME% url
 ::
 ++  bound
   |=  [wir=wire success=? binding=binding:eyre]
@@ -131,26 +131,26 @@
   ::
   ::  styling
   ::
-      [%'~chat' %css %index ~]
+      [%'~%APPNAME%' %css %index ~]
     :_  this
     [ost.bol %http-response (css-response:app style)]~
   ::
   ::  javascript
   ::
-      [%'~chat' %js %index ~]
+      [%'~%APPNAME%' %js %index ~]
     :_  this
     [ost.bol %http-response (js-response:app script)]~
   ::
   ::  images
   ::
-      [%'~chat' %img *]
-    =/  img  (as-octs:mimes:html (~(got by chat-png) `@ta`name))
+      [%'~%APPNAME%' %img *]
+    =/  img  (as-octs:mimes:html (~(got by %APPNAME%-png) `@ta`name))
     :_  this
     [ost.bol %http-response (png-response:app img)]~
   ::
   ::  inbox page
   ::
-     [%'~chat' *]
+     [%'~%APPNAME%' *]
     :_  this
     [ost.bol %http-response (html-response:app index)]~
   ==

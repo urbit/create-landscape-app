@@ -7,26 +7,16 @@ import urbitOb from 'urbit-ob';
 export class Subscription {
   start() {
     if (api.authTokens) {
-      this.initializeChat();
+      this.initialize%APPNAME%();
     } else {
       console.error("~~~ ERROR: Must set api.authTokens before operation ~~~");
     }
   }
 
-  initializeChat() {
-    api.bind('/primary', 'PUT', api.authTokens.ship, 'chat',
+  initialize%APPNAME%() {
+    api.bind('/primary', 'PUT', api.authTokens.ship, '%APPNAME%',
       this.handleEvent.bind(this),
       this.handleError.bind(this));
-  }
-
-  fetchMessages(circle, start, end) {
-    fetch(`/~chat/scroll/${circle}/${start}/${end}`)
-      .then((response) => response.json())
-      .then((json) => {
-        store.handleEvent({
-          data: json
-        });
-      });
   }
 
   handleEvent(diff) {
@@ -35,7 +25,7 @@ export class Subscription {
 
   handleError(err) {
     console.error(err);
-    api.bind('/primary', 'PUT', api.authTokens.ship, 'chat',
+    api.bind('/primary', 'PUT', api.authTokens.ship, '%APPNAME%',
       this.handleEvent.bind(this),
       this.handleError.bind(this));
   }
