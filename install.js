@@ -82,7 +82,7 @@ const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
     fs.unlinkSync('gulpfile.js')
-    fse.move('full', '/', {overwrite: true}, function(err) {
+    fse.move('full/*', '/*', {overwrite: true}, function(err) {
             if (err) return console.error(err)
             fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
             fse.move('urbit/app/smol/', 'urbit/app/' + result.appName, function(err) {})
