@@ -1,7 +1,7 @@
 const prompt = require('prompt')
 const replace = require('replace-in-file')
 const fs = require('fs')
-const mv = require('mv')
+const fse = require('fs-extra');
 
 // Making the text input a bit legible.
 
@@ -82,11 +82,11 @@ const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
     fs.unlinkSync('gulpfile.js')
-    mv('/full/*', '/', {mkdirp: true, clobber: true}, function(err) {
+    fse.move('/full/*', '/', {mkdirp: true, clobber: true}, function(err) {
         try {
             fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-            mv('urbit/app/smol/', 'urbit/app/' + result.appName, {mkdirp: true}, function(err) {})
-            mv('urbit/mar/smol/', 'urbit/mar/' + result.appName, { mkdirp: true }, function (err) {})
+            fse.move('urbit/app/smol/', 'urbit/app/' + result.appName, {mkdirp: true}, function(err) {})
+            fse.move('urbit/mar/smol/', 'urbit/mar/' + result.appName, { mkdirp: true }, function (err) {})
             fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
             let urbitPierOptions = {
                 files: '.urbitrc',
