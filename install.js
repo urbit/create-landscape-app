@@ -176,7 +176,7 @@ const setupFull = function (result) {
         let appNameOptions = {
             files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon', 'tile/tile.js', 
             'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-            'urbit/mar' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
+            'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
             'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon'
             ],
             from: /%APPNAME%/g,
