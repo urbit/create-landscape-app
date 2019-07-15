@@ -165,9 +165,7 @@ const setupFull = function (result) {
     moveDir('full', './', function() {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
         fs.renameSync('urbit/app/smol/', 'urbit/app/' + result.appName)
-            // why does this break v
         fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + result.appName)
-            // i just dunno
         fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
         let urbitPierOptions = {
             files: '.urbitrc',
@@ -180,7 +178,7 @@ const setupFull = function (result) {
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
                 'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
                 'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon',
-                'src/js/reducers/config.js'
+                'src/js/reducers/config.js', 'urbit/app/' + result.appName + '/index.html'
             ],
             from: /%APPNAME%/g,
             to: result.appName
