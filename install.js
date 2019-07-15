@@ -166,8 +166,7 @@ const setupFull = function (result) {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
         fs.rename('urbit/app/smol/', 'urbit/app/' + result.appName), function(err) {
             if (err) console.error(err)
-            fs.rename('urbit/mar/smol/', 'urbit/mar/' + result.appName), function (err) {
-                if (err) console.error(err)
+            fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + result.appName)
                 fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
                 let urbitPierOptions = {
                     files: '.urbitrc',
@@ -185,7 +184,6 @@ const setupFull = function (result) {
                     to: result.appName
                 }
                 replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
-            }        
         }
     })
 }
