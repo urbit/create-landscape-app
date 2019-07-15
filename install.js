@@ -179,7 +179,8 @@ const setupFull = function (result) {
             files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon', 'tile/tile.js',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
                 'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
-                'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon'
+                'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon',
+                'src/js/reducers/config.js'
             ],
             from: /%APPNAME%/g,
             to: result.appName
