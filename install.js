@@ -165,7 +165,6 @@ const setupFull = function (result) {
     moveDir('full', './', function() {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
         fs.renameSync('urbit/app/smol/', 'urbit/app/' + result.appName)
-            if (err) console.error(err)
             // why does this break v
         fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + result.appName)
             // i just dunno
