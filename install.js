@@ -155,7 +155,7 @@ var moveDir = function (from_dir, to_dir, callback) {
                 }).then(function () {
                     return fs.rmdir(from_dir);
                 });
-        }.then(callback));
+        }).then(callback);
 };
 
 const setupFull = function (result) {
