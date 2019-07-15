@@ -38,7 +38,7 @@ prompt.get([{
 // Delete the 'full' app folder and rename the tile-only files.
 
 const setupTile = function (result) {
-    fs.rmdirSync('full')
+    deleteFolderRecursive('full')
     fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
     let capitalisedAppName = result.appName.charAt(0).toUpperCase() + result.appName.slice(1)
     let appNameOptions = {
@@ -64,9 +64,23 @@ const setupTile = function (result) {
 
 // Delete the tile-specific files and move the full application to root. Rename everything as necessary.
 
+const deleteFolderRecursive = function (path) {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function (file, index) {
+            var curPath = path + "/" + file;
+            if (fs.lstatSync(curPath).isDirectory()) {
+                deleteFolderRecursive(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+};
+
 const setupFull = function (result) {
-    fs.rmdirSync('tile')
-    fs.rmdirSync('urbit')
+    deleteFolderRecursive('tile')
+    deleteFolderRecursive('urbit')
     fs.unlinkSync('/gulpfile.js')
     mv('/full', '/', {mkdirp: true, clobber: true}, function(err) {
         try {
