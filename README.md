@@ -29,9 +29,9 @@ Builds the application and copies it into your Urbit ship's pier, watching for c
 
 ## FAQ
 
-### What if I want to build a full application, not just a tile?
+### How can I ensure my app fits Modulo design?
 
-The future is a wonderful place that will include this functionality. Imagine.
+Modulo makes use of the [Tachyons](http://tachyons.io/) CSS framework. The template tile and full application both make use of it as an example for you to get going fast.
 
 ### What if I want to communicate with my ship / provide more functionality besides a front-end?
 

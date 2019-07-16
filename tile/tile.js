@@ -12,11 +12,7 @@ class %APPNAME% extends Component {
 
   render() {
     return <div className="w-100 h-100 relative" style={{ background: '#1a1a1a' }}>
-      <p className="gray" style={{
-        fontWeight: 'bold',
-        fontSize: 14,
-        lineHeight: '24px'
-      }}>%APPNAME%</p>
+    <p className="gray label-regular b absolute" style={{ left: 8, top: 4 }}>%APPNAME%</p>
     <p className="white">Welcome to your app, {this.props.data}.</p>
         </div>
   }
@@ -33,7 +29,7 @@ export default class %APPNAME%Tile extends Component {
       <div className="pa2" style={{
         width: outerSize,
         height: outerSize,
-        background: 'white'
+        background: 'rgb(26,26,26)'
       }}>
         {child}
       </div>
