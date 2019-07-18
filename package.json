@@ -1,7 +1,7 @@
 {
-  "name": "create-modulo-app",
-  "version": "0.2.0",
-  "description": "Get started with a Modulo application.",
+  "name": "create-landscape-app",
+  "version": "0.2.1",
+  "description": "Get started with a Landscape application.",
   "main": "node install.js",
   "scripts": {
     "start": "node install.js",
@@ -10,7 +10,7 @@
   },
   "author": "Tlon Corp",
   "license": "MIT",
-  "repository": "https://github.com/urbit/create-modulo-app",
+  "repository": "https://github.com/urbit/create-landscape-app",
   "devDependencies": {
     "@joseph184/rollup-plugin-node-builtins": "^2.1.4",
     "@sucrase/gulp-plugin": "^2.0.0",
