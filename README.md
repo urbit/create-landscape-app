@@ -1,5 +1,4 @@
 Get started building a simple application for Landscape on your [Urbit](http://urbit.org) ship with a few commands.
-<p align="center"><img src="https://user-images.githubusercontent.com/20846414/60992419-52be2a80-a301-11e9-9daf-ef36d38725b5.gif" height="auto" width="600"/></p>
 
 This tool is experimental and primarily used internally to develop front-end applications. While Tlon does not officially support this tool, you can always get general programming help for Urbit in the `~dopzod/urbit-help` chat.
 
