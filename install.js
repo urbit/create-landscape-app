@@ -40,7 +40,7 @@ prompt.get([{
 
 const setupTile = function (result) {
     deleteFolderRecursive('full')
-    fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
+    fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
     // Make a copy of the name without hyphens for the JS naming.
     let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
     let capitalisedAppName = deHyphenatedName.charAt(0).toUpperCase() + deHyphenatedName.slice(1)
