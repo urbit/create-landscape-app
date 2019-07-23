@@ -164,11 +164,12 @@ const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
     fs.unlinkSync('gulpfile.js')
+    let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
     moveDir('full', './', function() {
-        fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-        fs.renameSync('urbit/app/smol/', 'urbit/app/' + result.appName)
-        fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + result.appName)
-        fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + result.appName + '.hoon')
+        fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
+        fs.renameSync('urbit/app/smol/', 'urbit/app/' + deHyphenatedName)
+        fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + deHyphenatedName)
+        fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + deHyphenatedName + '.hoon')
         let urbitPierOptions = {
             files: '.urbitrc',
             from: "%URBITPIER%",
@@ -176,14 +177,14 @@ const setupFull = function (result) {
         }
         replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
         let appNameOptions = {
-            files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon', 'tile/tile.js',
+            files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon', 'tile/tile.js',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                'urbit/mar/' + result.appName + '/action.hoon', 'urbit/mar/' + result.appName + '/update.hoon',
-                'urbit/mar/' + result.appName + '/config.hoon', 'urbit/lib/' + result.appName + '.hoon',
-                'src/js/reducers/config.js', 'urbit/app/' + result.appName + '/index.html'
+                'urbit/mar/' + deHyphenatedName + '/action.hoon', 'urbit/mar/' + deHyphenatedName + '/update.hoon',
+                'urbit/mar/' + deHyphenatedName + '/config.hoon', 'urbit/lib/' + deHyphenatedName + '.hoon',
+                'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html'
             ],
             from: /%APPNAME%/g,
-            to: result.appName
+            to: deHyphenatedName
         }
         replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
     })
