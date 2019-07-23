@@ -41,7 +41,9 @@ prompt.get([{
 const setupTile = function (result) {
     deleteFolderRecursive('full')
     fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + result.appName + '.hoon')
-    let capitalisedAppName = result.appName.charAt(0).toUpperCase() + result.appName.slice(1)
+    // Make a copy of the name without hyphens for the JS naming.
+    let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
+    let capitalisedAppName = deHyphenatedName.charAt(0).toUpperCase() + deHyphenatedName.slice(1)
     let appNameOptions = {
         files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon'],
         from: /%APPNAME%/g,
@@ -50,7 +52,7 @@ const setupTile = function (result) {
     let appNamewithCapitals = {
         files: 'tile/tile.js',
         from: [/%APPNAME%Tile/g, /%APPNAME%/g],
-        to: [result.appName + "Tile", capitalisedAppName]
+        to: [deHyphenatedName + "Tile", capitalisedAppName]
     }
     let urbitPierOptions = {
         files: '.urbitrc',
