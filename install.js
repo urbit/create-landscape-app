@@ -47,7 +47,7 @@ const setupTile = function (result) {
     let appNameOptions = {
         files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon'],
         from: /%APPNAME%/g,
-        to: result.appName
+        to: deHyphenatedName
     }
     let appNamewithCapitals = {
         files: 'tile/tile.js',
