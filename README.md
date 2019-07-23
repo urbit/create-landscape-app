@@ -20,7 +20,7 @@ This runs the wizard. Give it an application name and the location of your Urbit
 
 This builds your application and copies it into your Urbit ship's pier. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-pier-name`) to synchronise your changes.
 
-If this is the first time you're running your application on your Urbit ship, don't forget to `|start %yourApp`.
+If this is the first time you're running your application on your Urbit ship, don't forget to `|start %yourapp`.
 
 ### `npm run serve`
 
@@ -34,7 +34,7 @@ Landscape makes use of the [Tachyons](http://tachyons.io/) CSS framework. The te
 
 ### What if I want to communicate with my ship / provide more functionality besides a front-end?
 
-By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourAppName]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Landscape interface.
+By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourappname]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Landscape interface.
 
 In order to do anything substantial, of course, you'll want to know [Hoon](https://urbit.org/docs/learn/hoon/). If this is intimidating, don't panic: `create-landscape-app` is a fantastic way to start learning by leveraging your strengths. This repository is intended to be a boilerplate for rapid front-end development; it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Landscape interface.
 
