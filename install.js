@@ -45,7 +45,7 @@ const setupTile = function (result) {
     let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
     let capitalisedAppName = deHyphenatedName.charAt(0).toUpperCase() + deHyphenatedName.slice(1)
     let appNameOptions = {
-        files: ['gulpfile.js', 'urbit/app/' + result.appName + '.hoon'],
+        files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon'],
         from: /%APPNAME%/g,
         to: deHyphenatedName
     }
