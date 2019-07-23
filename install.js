@@ -14,7 +14,11 @@ prompt.message = ""
 prompt.get([{
     name: 'appName',
     required: true,
-    description: "What's the name of your application? Lowercase and no spaces, please."
+    description: "What's the name of your application? Lowercase and no spaces, please.",
+    message: "Lowercase and no spaces, please.",
+    conform: function(value) {
+        return /^[a-z0-9]+((\-[a-z0-9]+){1,})?$/g.test(value)
+    }
     }, 
     {
     name: 'type',
