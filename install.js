@@ -33,7 +33,7 @@ prompt.get([{
     {
     name: 'pier',
     required: true,
-    description: "Where is your Urbit pier located? For example, '/Users/dev/zod/home'"
+    description: "Where is your Urbit pier located? For example, /Users/dev/zod/home"
     }], function (err, result) {
         if (result.type == "tile") setupTile(result)
         else if (result.type == "full") setupFull(result)
