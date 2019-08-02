@@ -1,6 +1,6 @@
 {
   "name": "create-landscape-app",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Get started with a Landscape application.",
   "main": "node install.js",
   "scripts": {
@@ -19,7 +19,6 @@
     "gulp-cssimport": "^7.0.0",
     "gulp-minify": "^3.1.0",
     "gulp-postcss": "^8.0.0",
-    "gulp-rename": "^1.4.0",
     "rollup": "^1.6.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-globals": "^1.4.0",

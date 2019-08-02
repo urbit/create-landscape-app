@@ -5,7 +5,6 @@ var cssnano = require('cssnano');
 var postcss = require('gulp-postcss');
 var sucrase = require('@sucrase/gulp-plugin');
 var minify = require('gulp-minify');
-var rename = require('gulp-rename');
 
 var resolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
