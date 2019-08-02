@@ -2,17 +2,13 @@ var gulp = require('gulp');
 var cssimport = require('gulp-cssimport');
 var rollup = require('gulp-better-rollup');
 var cssnano = require('cssnano');
-var autoprefixer = require('autoprefixer');
-var postcss = require('gulp-postcss')
+var postcss = require('gulp-postcss');
 var sucrase = require('@sucrase/gulp-plugin');
 var minify = require('gulp-minify');
-var exec = require('child_process').exec;
+var rename = require('gulp-rename');
 
 var resolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
-var replace = require('rollup-plugin-replace');
-var json = require('rollup-plugin-json');
-var builtins = require('@joseph184/rollup-plugin-node-builtins');
 var rootImport = require('rollup-plugin-root-import');
 var globals = require('rollup-plugin-node-globals');
 
@@ -28,7 +24,6 @@ var urbitrc = require('./.urbitrc');
 
 gulp.task('css-bundle', function() {
   let plugins = [
-    autoprefixer({ browsers: ['last 1 version'] }),
     cssnano()
   ];
   return gulp
@@ -64,17 +59,12 @@ gulp.task('js-imports', function(cb) {
             'node_modules/react-is/index.js': [ 'isValidElementType' ],
           }
         }),
-        replace({
-          'process.env.NODE_ENV': JSON.stringify('development')
-        }),
         rootImport({
           root: `${__dirname}/dist/js`,
           useEntry: 'prepend',
           extensions: '.js'
         }),
-        json(),
         globals(),
-        builtins(),
         resolve()
       ]
     }, 'umd'))
@@ -100,9 +90,7 @@ gulp.task('tile-js-imports', function(cb) {
           useEntry: 'prepend',
           extensions: '.js'
         }),
-        json(),
         globals(),
-        builtins(),
         resolve()
       ]
     }, 'umd'))
@@ -126,18 +114,6 @@ gulp.task('tile-js-minify', function () {
     .pipe(minify())
     .pipe(gulp.dest('./urbit/app/%APPNAME%/js/'));
 });
-
-gulp.task('js-cachebust', function(cb) {
-  return Promise.resolve(
-    exec('git log', function (err, stdout, stderr) {
-      let firstLine = stdout.split("\n")[0];
-      let commitHash = firstLine.split(' ')[1].substr(0, 10);
-      let newFilename = "index-" + commitHash + "-min.js";
-
-      exec('mv ./urbit/app/%APPNAME%/js/index-min.js ./urbit/app/%APPNAME%/js/' + newFilename);
-    })
-  );
-})
 
 gulp.task('urbit-copy', function () {
   let ret = gulp.src('urbit/**/*');
