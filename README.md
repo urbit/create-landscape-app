@@ -14,17 +14,17 @@ Once you're up and running, your tile lives in `tile/tile.js`, which uses [React
 
 ### `npm start`
 
-This runs the wizard. Give it an application name and the location of your Urbit ship's pier and it will customise the files so your new application will run on your ship.
+This runs the wizard. Give it an application name and the location of your Urbit ship's desk and it will customise the files so your new application will run on your ship.
 
 ### `npm run build`
 
-This builds your application and copies it into your Urbit ship's pier. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-pier-name`) to synchronise your changes.
+This builds your application and copies it into your Urbit ship's desk. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
 
 If this is the first time you're running your application on your Urbit ship, don't forget to `|start %yourapp`.
 
 ### `npm run serve`
 
-Builds the application and copies it into your Urbit ship's pier, watching for changes. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-pier-name`) to synchronise your changes.
+Builds the application and copies it into your Urbit ship's desk, watching for changes. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
 
 ## FAQ
 
