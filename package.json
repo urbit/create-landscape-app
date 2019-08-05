@@ -29,7 +29,6 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "fs-extra": "^8.1.0",
-    "fsevents": "^1.2.9",
     "lodash": "^4.17.11",
     "moment": "^2.20.1",
     "mousetrap": "^1.6.3",

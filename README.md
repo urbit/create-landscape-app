@@ -4,7 +4,7 @@ This tool is experimental and primarily used internally to develop front-end app
 
 ## Installation
 
-This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` (`npm install -f` on Linux) and then run `npm start` to get started (you can also directly clone this repository, if you wish!). 
+This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` and then run `npm start` to get started (you can also directly clone this repository, if you wish!). 
 
 In order to run your application on your ship, you will need Urbit v.0.8.0 or higher. On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount %`.
 
