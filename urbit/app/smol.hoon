@@ -9,18 +9,18 @@
       /~  ~
   ==
 =,  format
-:: This core defines the moves (system calls) the application makes, as well as their types.
+:: This core defines the effects the application makes, as well as their types.
 |%
-:: +move: output effect
+:: +effect: output effect
 ::
-+$  move  [bone card]
-:: +card: output effect payload
++$  effect  (pair bone syscall)
+:: +syscall: output effect payload
 ::
 +$  poke
   $%  [%launch-action [@tas path @t]]
   ==
 ::
-+$  card
++$  syscall
   $%  [%poke wire dock poke]
       [%http-response =http-event:http]
       [%connect wire binding:eyre term]
@@ -35,7 +35,7 @@
 ::
 ++  bound
   |=  [wir=wire success=? binding=binding:eyre]
-  ^-  (quip move _this)
+  ^-  (quip effect _this)
   [~ this]
 :: The prep arm sets up the application when it first starts up or when the source code is updated.
 :: We poke the launch app, which serves the tiles in the Modulo interface, with the app name, 
@@ -43,7 +43,7 @@
 :: The launch app expects window.[appNameTile] to contain the JS class for the tile (see tile/tile.js:47).
 ++  prep
   |=  old=(unit ~)
-  ^-  (quip move _this)
+  ^-  (quip effect _this)
   =/  launcha
     [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
   :_  this
@@ -60,23 +60,23 @@
 ::
 ++  peer-%APPNAME%tile
   |=  pax=path
-  ^-  (quip move _this)
+  ^-  (quip effect _this)
   =/  jon=json  [%s (crip (scow %p our.bol))]
   [[ost.bol %diff %json jon]~ this]
 
 :: When this arm is called from this application, 
-:: it sends moves to every subscriber of this application's unique path.
+:: it sends effects to every subscriber of this application's unique path.
 ++  send-tile-diff
   |=  jon=json
-  ^-  (list move)
+  ^-  (list effect)
   %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
   |=  [=bone ^]
   [bone %diff %json jon]
 ::
 ++  poke-handle-http-request
-  %-  (require-authorization:app ost.bol move this)
+  %-  (require-authorization:app ost.bol effect this)
   |=  =inbound-request:eyre
-  ^-  (quip move _this)
+  ^-  (quip effect _this)
   =/  request-line  (parse-request-line url.request.inbound-request)
   =/  back-path  (flop site.request-line)
   =/  name=@t
