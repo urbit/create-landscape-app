@@ -58,7 +58,7 @@
 ++  peer-%APPNAME%tile
   |=  pax=path
   ^-  (quip effect _+>.$)
-  =/  jon=json  [%s (crip (scow %p our.bol))]
+  =/  jon=json  [%s (scot %p our.bol)]
   [[ost.bol %diff %json jon]~ +>.$]
 
 :: When this arm is called from this application, 
