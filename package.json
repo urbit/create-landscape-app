@@ -39,7 +39,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "replace-in-file": "^4.1.1",
-    "urbit-ob": "^3.1.1"
+    "urbit-ob": "^4.1.2"
   },
   "resolutions": {
     "natives": "1.1.3"
