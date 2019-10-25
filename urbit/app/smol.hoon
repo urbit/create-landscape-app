@@ -9,18 +9,18 @@
       /~  ~
   ==
 =,  format
-:: This core defines the effects the application makes, as well as their types.
+:: This core defines the moves the application makes, as well as their types.
 |%
-:: +effect: output effect
+:: +move: output effect
 ::
-+$  effect  (pair bone syscall)
-:: +syscall: output effect payload
++$  move  (pair bone card)
 ::
 +$  poke
   $%  [%launch-action [@tas path @t]]
   ==
+:: +card: output move payload
 ::
-+$  syscall
++$  card
   $%  [%poke wire dock poke]
       [%http-response =http-event:http]
       [%connect wire binding:eyre term]
@@ -31,11 +31,11 @@
 ::
 |_  [bol=bowl:gall ~]
 :: "this" is a shorthand for returning the state.
-++  this  .
++*  this  .
 ::
 ++  bound
   |=  [wir=wire success=? binding=binding:eyre]
-  ^-  (quip effect _this)
+  ^-  (quip move _this)
   [~ this]
 :: The prep arm sets up the application when it first starts up or when the source code is updated.
 :: We poke the launch app, which serves the tiles in the Modulo interface, with the app name, 
@@ -43,13 +43,12 @@
 :: The launch app expects window.[appNameTile] to contain the JS class for the tile (see tile/tile.js:47).
 ++  prep
   |=  old=(unit ~)
-  ^-  (quip effect _this)
+  ^-  (quip move _this)
   =/  launcha
     [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
   :_  this
-  :~
-    [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-    [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
+  :~  [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
+      [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
   ==
 ::
 :: peer-%APPNAME%tile allows other apps (or the wider internet) to subscribe to this app.
@@ -60,23 +59,23 @@
 ::
 ++  peer-%APPNAME%tile
   |=  pax=path
-  ^-  (quip effect _this)
+  ^-  (quip move _this)
   =/  jon=json  [%s (crip (scow %p our.bol))]
   [[ost.bol %diff %json jon]~ this]
 
 :: When this arm is called from this application, 
-:: it sends effects to every subscriber of this application's unique path.
+:: it sends moves to every subscriber of this application's unique path.
 ++  send-tile-diff
   |=  jon=json
-  ^-  (list effect)
+  ^-  (list move)
   %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
   |=  [=bone ^]
   [bone %diff %json jon]
 ::
 ++  poke-handle-http-request
-  %-  (require-authorization:app ost.bol effect this)
+  %-  (require-authorization:app ost.bol move this)
   |=  =inbound-request:eyre
-  ^-  (quip effect _this)
+  ^-  (quip move _this)
   =/  request-line  (parse-request-line url.request.inbound-request)
   =/  back-path  (flop site.request-line)
   =/  name=@t
