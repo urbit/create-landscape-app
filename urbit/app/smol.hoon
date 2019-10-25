@@ -47,9 +47,8 @@
   =/  launcha
     [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
   :_  this
-  :~
-    [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-    [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
+  :~  [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
+      [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
   ==
 ::
 :: peer-%APPNAME%tile allows other apps (or the wider internet) to subscribe to this app.
