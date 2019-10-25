@@ -31,7 +31,7 @@
 ::
 |_  [bol=bowl:gall ~]
 :: "this" is a shorthand for returning the state.
-++  this  .
++*  this  .
 ::
 ++  bound
   |=  [wir=wire success=? binding=binding:eyre]
