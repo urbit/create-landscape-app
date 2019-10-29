@@ -1,6 +1,6 @@
 {
   "name": "create-landscape-app",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Get started with a Landscape application.",
   "main": "node install.js",
   "scripts": {
