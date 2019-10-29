@@ -1,5 +1,4 @@
-/-  hall
-/+  *server, %APPNAME%, hall-json
+/+  *server
 /=  index
   /^  octs
   /;  as-octs:mimes:html
@@ -35,28 +34,40 @@
   /^  (map knot @)
   /:  /===/app/%APPNAME%/img  /_  /png/
 ::
-=,  %APPNAME%
+=,  format
+|%
+:: +move: output effect
 ::
-|_  [bol=bowl:gall sta=state]
++$  move  (pair bone card)
+::
++$  poke
+  $%  [%launch-action [@tas path @t]]
+  ==
+:: +card: output move payload
+::
++$  card
+  $%  [%poke wire dock poke]
+      [%http-response =http-event:http]
+      [%connect wire binding:eyre term]
+      [%diff %json json]
+  ==
+--
+::
+|_  [bol=bowl:gall ~]
 ::
 ++  this  .
 ::
-::  +prep: set up the app, migrate the state once started
+::  +prep: set up the app
 ::
 ++  prep
-  |=  old=(unit state)
+  |=  old=(unit ~)
   ^-  (quip move _this)
-  =/  launcha/poke
+  =/  launcha
     [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
-  ?~  old
-    :_  this
-    :~ 
-        :: %connect here tells %eyre to mount at the /~%APPNAME% endpoint.
-        [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-        [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
-    ==
-  :-  [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]~
-  this(sta u.old)
+  :_  this
+  :~  [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
+      [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
+  ==
 ::
 ::
 ++  peer-%APPNAME%tile
@@ -72,35 +83,6 @@
   |=  wir=wire
   ^-  (quip move _this)
   [~ this]
-::
-::  +poke-%APPNAME%: send us an action
-::
-++  poke-%APPNAME%-action
-  |=  act=action:%APPNAME%
-  ^-  (quip move _this)
-  [~ this] 
-::
-::  +send-%APPNAME%-update: utility func for sending updates to all our subscribers
-::
-++  send-%APPNAME%-update
-  |=  [upd=update str=streams]
-  ^-  (list move)
-  =/  updates/(list move)
-    %+  turn  (prey:pubsub:userlib /primary bol)
-    |=  [=bone *]
-    [bone %diff %%APPNAME%-update upd]
-  ::
-  =/  tile-updates/(list move)
-    %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
-    |=  [=bone *]
-    [bone %diff %json *json]
-  ::
-  %+  weld
-    updates
-    tile-updates
-
-::
-::  +lient arms
 ::
 ::
 ::  +bound: lient tells us we successfully bound our server to the ~%APPNAME% url

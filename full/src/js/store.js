@@ -6,12 +6,7 @@ import { UpdateReducer } from '/reducers/update';
 class Store {
     constructor() {
         this.state = {
-            inbox: {},
-            messages: {},
-            configs: {},
-            circles: [],
-            peers: {},
-            spinner: false
+            inbox: {}
         };
 
         this.initialReducer = new InitialReducer();
