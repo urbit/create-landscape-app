@@ -6,10 +6,6 @@ export class ConfigReducer {
         let data = _.get(json, '%APPNAME%', false);
         if (data) {
             state.inbox = data.inbox;
-            state.configs = data.configs;
-            state.circles = data.circles;
-            state.peers = data.peers;
-            state.messages = state.messages || {};
         }
     }
 }

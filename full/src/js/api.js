@@ -8,8 +8,7 @@ class UrbitApi {
     this.bindPaths = [];
   }
 
-  // keep default bind to hall, since its bind procedure more complex for now AA
-  bind(path, method, ship = this.authTokens.ship, appl = "hall", success, fail) {
+  bind(path, method, ship = this.authTokens.ship, appl = "%APPNAME%", success, fail) {
     this.bindPaths = _.uniq([...this.bindPaths, path]);
 
     window.subscriptionId = window.urb.subscribe(ship, appl, path, 
@@ -28,10 +27,6 @@ class UrbitApi {
       (err) => {
         fail(err);
       });
-  }
-
-  hall(data) {
-    this.action("hall", "hall-action", data);
   }
 
   %APPNAME%(data) {

@@ -172,8 +172,6 @@ const setupFull = function (result) {
     moveDir('full', './', function() {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
         fs.renameSync('urbit/app/smol/', 'urbit/app/' + deHyphenatedName)
-        fs.renameSync('urbit/mar/smol/', 'urbit/mar/' + deHyphenatedName)
-        fs.renameSync('urbit/lib/smol.hoon', 'urbit/lib/' + deHyphenatedName + '.hoon')
         let urbitPierOptions = {
             files: '.urbitrc',
             from: "%URBITPIER%",
@@ -183,8 +181,6 @@ const setupFull = function (result) {
         let appNameOptions = {
             files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon', 'tile/tile.js',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                'urbit/mar/' + deHyphenatedName + '/action.hoon', 'urbit/mar/' + deHyphenatedName + '/update.hoon',
-                'urbit/mar/' + deHyphenatedName + '/config.hoon', 'urbit/lib/' + deHyphenatedName + '.hoon',
                 'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html'
             ],
             from: /%APPNAME%/g,
