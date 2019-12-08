@@ -1,4 +1,4 @@
-/+  *server
+/+  *server, default-agent
 /=  index
   /^  octs
   /;  as-octs:mimes:html
@@ -27,114 +27,88 @@
   /|  /css/
       /~  ~
   ==
-:: This iterates over item in the img directory, takes their filenames
-:: at @tas (knots), takes the file as @ (binary) and runs it through the 
-:: png mark.
 /=  %APPNAME%-png
   /^  (map knot @)
   /:  /===/app/%APPNAME%/img  /_  /png/
 ::
-=,  format
 |%
-:: +move: output effect
-::
-+$  move  (pair bone card)
-::
-+$  poke
-  $%  [%launch-action [@tas path @t]]
-  ==
-:: +card: output move payload
-::
-+$  card
-  $%  [%poke wire dock poke]
-      [%http-response =http-event:http]
-      [%connect wire binding:eyre term]
-      [%diff %json json]
-  ==
++$  card  card:agent:gall
 --
+^-  agent:gall
+=<
+  |_  bol=bowl:gall
+  +*  this       .
+      %APPNAME%-core  +>
+      cc         ~(. %APPNAME%-core bol)
+      def        ~(. (default-agent this %|) bol)
+  ::
+  ++  on-init
+    ^-  (quip card _this)
+    =/  launcha  [%launch-action !>([%%APPNAME% / '/~%APPNAME%/js/tile.js'])]
+    :_  this
+    :~  [%pass /%APPNAME% %agent [our.bol %%APPNAME%] %watch /%APPNAME%]
+        [%pass / %arvo %e %connect [~ /'~%APPNAME%'] %%APPNAME%]
+        [%pass /%APPNAME% %agent [our.bol %launch] %poke launcha]
+    ==
+  ++  on-poke
+    |=  [=mark =vase]
+    ^-  (quip card _this)
+    ?>  (team:title our.bol src.bol)
+    ?+    mark  (on-poke:def mark vase)
+        %handle-http-request
+      =+  !<([eyre-id=@ta =inbound-request:eyre] vase)
+      :_  this
+      %+  give-simple-payload:app  eyre-id
+      %+  require-authorization:app  inbound-request
+      poke-handle-http-request:cc
+    ::
+    ==
+  ::
+  ++  on-watch
+    |=  =path
+    ^-  (quip card:agent:gall _this)
+    ?:  ?=([%http-response *] path)
+      `this
+    ?.  =(/ path)
+      (on-watch:def path)
+    [[%give %fact ~ %json !>(*json)]~ this]
+  ::
+  ++  on-agent  on-agent:def
+  ::
+  ++  on-arvo   
+    |=  [=wire =sign-arvo]
+    ^-  (quip card _this)
+    ?.  ?=(%bound +<.sign-arvo)
+      (on-arvo:def wire sign-arvo)
+    [~ this]
+  ::
+  ++  on-save  on-save:def
+  ++  on-load  on-load:def
+  ++  on-leave  on-leave:def
+  ++  on-peek   on-peek:def
+  ++  on-fail   on-fail:def
+  --
 ::
-|_  [bol=bowl:gall ~]
 ::
-++  this  .
-::
-::  +prep: set up the app
-::
-++  prep
-  |=  old=(unit ~)
-  ^-  (quip move _this)
-  =/  launcha
-    [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
-  :_  this
-  :~  [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-      [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
-  ==
-::
-::
-++  peer-%APPNAME%tile
-  |=  wir=wire
-  ^-  (quip move _this)
-  :_  this
-  [ost.bol %diff %json *json]~
-::
-::  +peer-messages: subscribe to subset of messages and updates
-::
-::
-++  peer-primary
-  |=  wir=wire
-  ^-  (quip move _this)
-  [~ this]
-::
-::
-::  +bound: lient tells us we successfully bound our server to the ~%APPNAME% url
-::
-++  bound
-  |=  [wir=wire success=? binding=binding:eyre]
-  ^-  (quip move _this)
-  [~ this]
-::
-::  +poke-handle-http-request: serve pages from file system based on URl path
+|_  bol=bowl:gall
 ::
 ++  poke-handle-http-request
-  %-  (require-authorization:app ost.bol move this)
   |=  =inbound-request:eyre
-  ^-  (quip move _this)
+  ^-  simple-payload:http
+  =+  url=(parse-request-line url.request.inbound-request)
+  ?+  site.url  not-found:gen
+      [%'~%APPNAME%' %css %index ~]  (css-response:gen style)
+      [%'~%APPNAME%' %js %tile ~]    (js-response:gen tile-js)
+      [%'~%APPNAME%' %js %index ~]   (js-response:gen script)
   ::
-  =+  request-line=(parse-request-line url.request.inbound-request)
-  =/  name=@t
-    =+  back-path=(flop site.request-line)
-    ?~  back-path
-      ''
-    i.back-path
-  ?:  =(name 'tile')
-    [[ost.bol %http-response (js-response:app tile-js)]~ this]
-  ?+  site.request-line
-    :_  this
-    [ost.bol %http-response not-found:app]~
+      [%'~%APPNAME%' %img @t *]
+    =/  name=@t  i.t.t.site.url
+    =/  img  (~(get by %APPNAME%-png) name)
+    ?~  img
+      not-found:gen
+    (png-response:gen (as-octs:mimes:html u.img))
   ::
-  ::  styling
-  ::
-      [%'~%APPNAME%' %css %index ~]
-    :_  this
-    [ost.bol %http-response (css-response:app style)]~
-  ::
-  ::  javascript
-  ::
-      [%'~%APPNAME%' %js %index ~]
-    :_  this
-    [ost.bol %http-response (js-response:app script)]~
-  ::
-  ::  images
-  ::
-      [%'~%APPNAME%' %img *]
-    =/  img  (as-octs:mimes:html (~(got by %APPNAME%-png) `@ta`name))
-    :_  this
-    [ost.bol %http-response (png-response:app img)]~
-  ::
-  ::  inbox page
-  ::
-     [%'~%APPNAME%' *]
-    :_  this
-    [ost.bol %http-response (html-response:app index)]~
+      [%'~%APPNAME%' *]  (html-response:gen index)
   ==
 ::
 --

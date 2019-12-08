@@ -1,6 +1,4 @@
-:: Importing the server library.
-/+  *server
-:: This imports the tile's JS file from the file system as a variable.
+/+  *server, default-agent, verb
 /=  tile-js
   /^  octs
   /;  as-octs:mimes:html
@@ -9,73 +7,33 @@
       /~  ~
   ==
 =,  format
-:: This core defines the moves the application makes, as well as their types.
-|%
-:: +move: output effect
 ::
-+$  move  (pair bone card)
+%+  verb  |
+^-  agent:gall
+|_  =bowl:gall
++*  this  .
+    def   ~(. (default-agent this %|) bowl)
 ::
-+$  poke
-  $%  [%launch-action [@tas path @t]]
-  ==
-:: +card: output move payload
-::
-+$  card
-  $%  [%poke wire dock poke]
-      [%http-response =http-event:http]
-      [%connect wire binding:eyre term]
-      [%diff %json json]
-  ==
-::
---
-::
-|_  [bol=bowl:gall ~]
-:: "this" is a shorthand for returning the state.
-++  this  .
-::
-++  bound
-  |=  [wir=wire success=? binding=binding:eyre]
-  ^-  (quip move _this)
-  [~ this]
-:: The prep arm sets up the application when it first starts up or when the source code is updated.
-:: We poke the launch app, which serves the tiles in the Modulo interface, with the app name, 
-:: the unique path to subscribe to our app (where to send JSON to the tile) and the path the tile's served on.
-:: The launch app expects window.[appNameTile] to contain the JS class for the tile (see tile/tile.js:47).
-++  prep
-  |=  old=(unit ~)
-  ^-  (quip move _this)
+++  on-init
+  ^-  (quip card:agent:gall _this)
   =/  launcha
-    [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
+    [%launch-action !>([%%APPNAME% /tile '/~%APPNAME%/js/tile.js'])]
   :_  this
-  :~  [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-      [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
+  :~  [%pass / %arvo %e %connect [~ /'~%APPNAME%'] %%APPNAME%]
+      [%pass /%APPNAME% %agent [our.bowl %launch] %poke launcha]
   ==
-::
-:: peer-%APPNAME%tile allows other apps (or the wider internet) to subscribe to this app.
-:: In this example, it sends "our.bol" (our ship's name) as a JSON string to our React.js file.
-:: If you have nothing to send to the tile -- if the tile has nothing to receive from your ship --
-:: you'll want to "bunt" (sending a blank with *) the JSON: delete line 62 and replace line 63 with
-:: [[ost.bol %diff %json *json]~ this]
-::
-++  peer-%APPNAME%tile
-  |=  pax=path
-  ^-  (quip move _this)
-  =/  jon=json  [%s (crip (scow %p our.bol))]
-  [[ost.bol %diff %json jon]~ this]
-
-:: When this arm is called from this application, 
-:: it sends moves to every subscriber of this application's unique path.
-++  send-tile-diff
-  |=  jon=json
-  ^-  (list move)
-  %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
-  |=  [=bone ^]
-  [bone %diff %json jon]
-::
-++  poke-handle-http-request
-  %-  (require-authorization:app ost.bol move this)
+++  on-save   on-save:def
+++  on-load   on-load:def
+++  on-poke
+  |=  [=mark =vase]
+  ^-  (quip card:agent:gall _this)
+  ?.  ?=(%handle-http-request mark)
+    (on-poke:def mark vase)
+  =+  !<([eyre-id=@ta =inbound-request:eyre] vase)
+  :_  this
+  %+  give-simple-payload:app  eyre-id
+  %+  require-authorization:app  inbound-request
   |=  =inbound-request:eyre
-  ^-  (quip move _this)
   =/  request-line  (parse-request-line url.request.inbound-request)
   =/  back-path  (flop site.request-line)
   =/  name=@t
@@ -85,9 +43,29 @@
     i.back-path
   ::
   ?~  back-path
-    [[ost.bol %http-response not-found:app]~ this]
+    not-found:gen
   ?:  =(name 'tile')
-    [[ost.bol %http-response (js-response:app tile-js)]~ this]
-  [[ost.bol %http-response not-found:app]~ this]
+    (js-response:gen tile-js)
+  not-found:gen
 ::
+++  on-watch
+  |=  =path
+  ^-  (quip card:agent:gall _this)
+  ?:  ?=([%http-response *] path)
+    `this
+  ?.  =(/tile path)
+    (on-watch:def path)
+  [[%give %fact ~ %json !>(*json)]~ this]
+::
+++  on-leave  on-leave:def
+++  on-peek   on-peek:def
+++  on-agent  on-agent:def
+++  on-arvo
+  |=  [=wire =sign-arvo]
+  ^-  (quip card:agent:gall _this)
+  ?.  ?=(%bound +<.sign-arvo)
+    (on-arvo:def wire sign-arvo)
+  [~ this]
+::
+++  on-fail   on-fail:def
 --
