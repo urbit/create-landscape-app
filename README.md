@@ -6,7 +6,7 @@ This tool is experimental and primarily used internally to develop front-end app
 
 This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` and then run `npm start` to get started (you can also directly clone this repository, if you wish!). 
 
-In order to run your application on your ship, you will need Urbit v.0.8.0 or higher. On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount %`.
+In order to run your application on your ship, you will need Urbit v.0.10.0 or higher. On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount %`.
 
 ## Using
 
@@ -36,6 +36,6 @@ Landscape makes use of the [Tachyons](http://tachyons.io/) CSS framework. The te
 
 By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourappname]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Landscape interface.
 
-In order to do anything substantial, of course, you'll want to know [Hoon](https://urbit.org/docs/learn/hoon/). If this is intimidating, don't panic: `create-landscape-app` is a fantastic way to start learning by leveraging your strengths. This repository is intended to be a boilerplate for rapid front-end development; it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Landscape interface.
+In order to do anything substantial, of course, you'll want to know [Hoon](https://urbit.org/docs/tutorials/hoon/). If this is intimidating, don't panic: `create-landscape-app` is a fantastic way to start learning by leveraging your strengths. This repository is intended to be a boilerplate for rapid front-end development; it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Landscape interface.
 
 Happy hacking!
