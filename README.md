@@ -28,6 +28,15 @@ Builds the application and copies it into your Urbit ship's desk, watching for c
 
 ## FAQ
 
+### What is a "tile" vs. "full" app?
+
+When you run `npm run start`, the wizard will ask you to specify which you want:
+
+- **tile**: A tile that exists on the Landscape launch screen. A pre-existing example is the "Weather" tile or the "Clock" tile in Landscape.
+- **full**: A tile that links to a full-screen application: this means that you will work in both `tile.js` (for the tile interface) and `root.js` (and beyond) in the `src` folder.
+
+No matter which option you specify, the wizard will customise the Hoon boilerplate for you and provide a basic example accordingly.
+
 ### How can I ensure my app fits Landscape design?
 
 Landscape makes use of the [Tachyons](http://tachyons.io/) CSS framework. The template tile and full application both make use of it as an example for you to get going fast.
