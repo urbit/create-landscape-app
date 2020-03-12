@@ -4,7 +4,7 @@ This tool is experimental and primarily used internally to develop front-end app
 
 ## Installation
 
-This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` and then run `npm start` to get started (you can also directly clone this repository, if you wish!). 
+This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` and then run `npm start` to get started (you can also directly clone this repository, if you wish!).
 
 In order to run your application on your ship, you will need Urbit v.0.10.0 or higher. On your Urbit ship, if you haven't already, mount your pier to Unix with `|mount %`.
 
@@ -39,7 +39,7 @@ No matter which option you specify, the wizard will customise the Hoon boilerpla
 
 ### How can I ensure my app fits Landscape design?
 
-Landscape makes use of the [Tachyons](http://tachyons.io/) CSS framework. The template tile and full application both make use of it as an example for you to get going fast.
+Landscape makes use of the [Indigo](https://urbit.github.io/indigo-react/) CSS framework. The template tile and full application both make use of it as an example for you to get going fast.
 
 ### What if I want to communicate with my ship / provide more functionality besides a front-end?
 

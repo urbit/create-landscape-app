@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
-import { sealDict } from '/components/lib/seal-dict';
+import { sigil, reactRenderer } from 'urbit-sigil-js';
 
 
 export class Sigil extends Component {
   render() {
-    let prefix = this.props.prefix ? JSON.parse(this.props.prefix) : false;
+    const { props } = this;
 
-    return (
-      <div 
-        className="bg-black" 
-        style={{ flexBasis: 35, padding: 4, paddingBottom: 0 }}>
-      {
-        sealDict.getSeal(this.props.ship, this.props.size, prefix)
-      }
-      </div>
-    );
+    let classes = props.classes || "";
+
+    if (props.ship.length > 14) {
+      return (
+        <div
+          className={"bg-black dib " + classes}
+          style={{ width: props.size, height: props.size }}>
+        </div>
+      );
+    } else {
+      return (
+        <div className={"dib " + classes} style={{ flexBasis: 32, backgroundColor: props.color }}>
+          {sigil({
+            patp: props.ship,
+            renderer: reactRenderer,
+            size: props.size,
+            colors: [props.color, "white"]
+          })}
+        </div>
+      );
+    }
   }
 }
 
