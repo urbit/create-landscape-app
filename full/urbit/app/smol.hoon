@@ -46,8 +46,7 @@
     ^-  (quip card _this)
     =/  launcha  [%launch-action !>([%%APPNAME% / '/~%APPNAME%/js/tile.js'])]
     :_  this
-    :~  [%pass / %agent [our.bol %%APPNAME%] %watch /%APPNAME%]
-        [%pass / %arvo %e %connect [~ /'~%APPNAME%'] %%APPNAME%]
+    :~  [%pass / %arvo %e %connect [~ /'~%APPNAME%'] %%APPNAME%]
         [%pass /%APPNAME% %agent [our.bol %launch] %poke launcha]
     ==
   ++  on-poke
