@@ -181,7 +181,7 @@ const setupFull = function (result) {
         let appNameOptions = {
             files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon', 'tile/tile.js',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html', '/src/js/components/lib/icons/icon-home.js'
+                'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html', 'src/js/components/lib/icons/icon-home.js'
             ],
             from: /%APPNAME%/g,
             to: deHyphenatedName
