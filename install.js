@@ -19,7 +19,7 @@ prompt.get([{
     conform: function(value) {
         return /^[a-z0-9]+((\-[a-z0-9]+){1,})?$/g.test(value)
     }
-    }, 
+    },
     {
     name: 'type',
     required: true,
@@ -181,7 +181,7 @@ const setupFull = function (result) {
         let appNameOptions = {
             files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon', 'tile/tile.js',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html'
+                'src/js/reducers/config.js', 'urbit/app/' + deHyphenatedName + '/index.html', '/src/js/components/lib/icons/icon-home.js'
             ],
             from: /%APPNAME%/g,
             to: deHyphenatedName

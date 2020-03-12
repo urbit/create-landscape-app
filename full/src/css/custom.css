@@ -6,8 +6,8 @@ p, h1, h2, h3, h4, h5, h6, a, input, textarea, button {
   font-family: Inter, sans-serif;
 }
 
-textarea, select, input, button { 
-  outline: none; 
+textarea, select, input, button {
+  outline: none;
   -webkit-appearance: none;
   border: none;
   background-color: #fff;
@@ -87,3 +87,69 @@ h2 {
   font-family: Inter, sans-serif;
 }
 
+.mix-blend-diff {
+  mix-blend-mode: difference;
+}
+
+/* dark */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+  }
+  .bg-black-d {
+    background-color: black;
+  }
+  .white-d {
+    color: white;
+  }
+  .gray1-d {
+    color: #4d4d4d;
+  }
+  .gray2-d {
+    color: #7f7f7f;
+  }
+  .gray3-d {
+    color: #b1b2b3;
+  }
+  .gray4-d {
+    color: #e6e6e6;
+  }
+  .bg-gray0-d {
+    background-color: #333;
+  }
+  .bg-gray1-d {
+    background-color: #4d4d4d;
+  }
+  .b--gray0-d {
+    border-color: #333;
+  }
+  .b--gray1-d {
+    border-color: #4d4d4d;
+  }
+  .b--gray2-d {
+    border-color: #7f7f7f;
+  }
+  .b--white-d {
+    border-color: #fff;
+  }
+  .bb-d {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  .invert-d {
+    filter: invert(1);
+  }
+  .o-80-d {
+    opacity: .8;
+  }
+  .focus-b--white-d:focus {
+    border-color: #fff;
+  }
+  a {
+    color: #fff;
+  }
+  .hover-bg-gray1-d:hover {
+    color: #4d4d4d;
+  }
+}
