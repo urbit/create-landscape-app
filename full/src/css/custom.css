@@ -58,29 +58,8 @@ h2 {
   line-height: 16px;
   font-weight: 600;
 }
-
-.fw-normal {
-  font-weight: 400;
-}
-
-.fw-bold {
-  font-weight: bold;
-}
-
-.bg-v-light-gray {
-  background-color: #f9f9f9;
-}
-
-.nice-green {
-  color: #2AA779;
-}
-
-.bg-nice-green {
-  background: #2ED196;
-}
-
-.nice-red {
-  color: #EE5432;
+.mono {
+  font-family: "Source Code Pro", monospace;
 }
 
 .inter {
