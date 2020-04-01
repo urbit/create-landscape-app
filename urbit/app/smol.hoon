@@ -17,7 +17,7 @@
 ++  on-init
   ^-  (quip card:agent:gall _this)
   =/  launcha
-    [%launch-action !>([%%APPNAME% /tile '/~%APPNAME%/js/tile.js'])]
+    [%launch-action !>([%add %%APPNAME% /tile '/~%APPNAME%/js/tile.js'])]
   :_  this
   :~  [%pass / %arvo %e %connect [~ /'~%APPNAME%'] %%APPNAME%]
       [%pass /%APPNAME% %agent [our.bowl %launch] %poke launcha]
