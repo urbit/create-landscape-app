@@ -17,7 +17,7 @@ export class Root extends Component {
         <HeaderBar/>
         <Route exact path="/~%APPNAME%" render={ () => {
           return (
-            <div className="cf w-100 flex flex-column pa4 ba-m ba-l ba-xl b--gray2 br1 h-100 h-100-minus-40-m h-100-minus-40-l h-100-minus-40-xl f9 white-d">
+            <div className="cf w-100 flex flex-column pa4 ba-m ba-l ba-xl b--gray2 br1 h-100 h-100-minus-40-s h-100-minus-40-m h-100-minus-40-l h-100-minus-40-xl f9 white-d overflow-x-hidden">
               <h1 className="mt0 f8 fw4">%APPNAME%</h1>
               <p className="lh-copy measure pt3">Welcome to your Landscape application.</p>
               <p className="lh-copy measure pt3">To get started, edit <code>src/index.js</code> or <code>%APPNAME%.hoon</code> and <code>|commit %home</code> on your Urbit ship to see your changes.</p>
