@@ -53,7 +53,7 @@
   ^-  (quip card:agent:gall _this)
   ?:  ?=([%http-response *] path)
     `this
-  ?.  =([%APPNAME%tile *] path)
+  ?.  =([/%APPNAME%tile *] path)
     (on-watch:def path)
   [[%give %fact ~ %json !>(*json)]~ this]
 ::
