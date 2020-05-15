@@ -41,6 +41,17 @@ No matter which option you specify, the wizard will customise the Hoon boilerpla
 
 Landscape makes use of the [Indigo](https://urbit.github.io/indigo-react/) CSS framework. The template tile and full application both make use of it as an example for you to get going fast.
 
+### How do I develop on a different ship?
+
+Edit the `.urbitrc` file with the path to your new pier/desk
+
+`module.exports = {
+  URBIT_PIERS: [
+    "/path/to/new-pier/desk-name",
+  ]
+};`
+
+
 ### What if I want to communicate with my ship / provide more functionality besides a front-end?
 
 By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourappname]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Landscape interface.
