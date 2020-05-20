@@ -65,7 +65,7 @@
   ::
   ++  on-watch
     |=  =path
-    ^-  (quip card:agent:gall _this)
+    ^-  (quip card _this)
     ?:  ?=([%http-response *] path)
       `this
     ?.  =(/ path)
