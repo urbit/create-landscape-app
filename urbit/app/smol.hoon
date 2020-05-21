@@ -54,11 +54,12 @@
 ++  on-watch
   |=  =path
   ^-  (quip card _this)
-  ?:  ?=([%http-response *] path)
-    `this
-  ?.  =([/%APPNAME%tile *] path)
-    (on-watch:def path)
-  [[%give %fact ~ %json !>(*json)]~ this]
+  ?+    path  (on-watch:def path)
+      [%http-response *]  `this
+      [%%APPNAME%tile ~]
+    :_  this
+    [%give %fact ~[/%APPNAME%tile] %json !>(*json)]~
+  ==
 ::
 ++  on-leave  on-leave:def
 ++  on-peek   on-peek:def
