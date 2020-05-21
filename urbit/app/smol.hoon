@@ -30,35 +30,80 @@
 ++  on-poke
   |=  [=mark =vase]
   ^-  (quip card _this)
-  ?.  ?=(%handle-http-request mark)
-    (on-poke:def mark vase)
-  =+  !<([eyre-id=@ta =inbound-request:eyre] vase)
-  :_  this
-  %+  give-simple-payload:app  eyre-id
-  %+  require-authorization:app  inbound-request
-  |=  =inbound-request:eyre
-  =/  request-line  (parse-request-line url.request.inbound-request)
-  =/  back-path  (flop site.request-line)
-  =/  name=@t
+  ?+    mark  (on-poke:def mark vase)
+      %handle-http-request
+    =+  !<([eyre-id=@ta =inbound-request:eyre] vase)
+    :_  this
+    %+  give-simple-payload:app  eyre-id
+    %+  require-authorization:app  inbound-request
+    |=  =inbound-request:eyre
+    =/  request-line  (parse-request-line url.request.inbound-request)
     =/  back-path  (flop site.request-line)
+    =/  name=@t
+      =/  back-path  (flop site.request-line)
+      ?~  back-path
+        ''
+      i.back-path
+    ::
     ?~  back-path
-      ''
-    i.back-path
-  ::
-  ?~  back-path
+      not-found:gen
+    ?:  =(name 'tile')
+      (js-response:gen tile-js)
     not-found:gen
-  ?:  =(name 'tile')
-    (js-response:gen tile-js)
-  not-found:gen
+  ::
+  ::  SAMPLE TILE APP
+  ::
+      %json
+    ~&  [%on-poke %json json=!<(json vase)]
+    =/  put  ((om:dejs:format same) !<(json vase))
+    =/  act  (so:dejs:format (~(got by put) %action))
+    =/  sponsor
+      sponsor+s+(scot %p (sein:title our.bowl now.bowl our.bowl))
+    =/  date
+      date+s+(scot %da now.bowl)
+    =/  =json
+      %-  pairs:enjs:format
+      ?:  =(act 'sponsor')
+        :~(sponsor)
+      ?:  =(act 'date')
+        :~(date)
+      ?:  =(act 'both')
+        :~(sponsor date)
+      ~&  >>  [%on-poke %unknown action=act]
+      :~(unknown+s+act)
+    :_  this
+    [%give %fact ~[/%APPNAME%tile] %json !>(json)]~
+  ::
+  ::  SAMPLE END
+  ::
+  ==
 ::
 ++  on-watch
   |=  =path
   ^-  (quip card _this)
-  ?:  ?=([%http-response *] path)
-    `this
-  ?.  =([/%APPNAME%tile *] path)
-    (on-watch:def path)
-  [[%give %fact ~ %json !>(*json)]~ this]
+  ?+    path  (on-watch:def path)
+      [%http-response *]  `this
+      [%%APPNAME%tile ~]
+  ::
+  ::  SAMPLE TILE APP
+  ::
+    ::  you could do this (empty javascript object):
+    ::  :_  this
+    ::  [%give %fact ~[/%APPNAME%tile] %json !>(*json)]~
+    ::
+    ::  or this (nothing sent to browser):
+    ::  `this
+    ::
+    ::  we'll do this (sample tile app):
+    =/  =json
+      %-  pairs:enjs:format
+      :~(sponsor+s+'???' date+s+'!!!')
+    :_  this
+    [%give %fact ~[/%APPNAME%tile] %json !>(json)]~
+  ::
+  ::  SAMPLE END
+  ::
+  ==
 ::
 ++  on-leave  on-leave:def
 ++  on-peek   on-peek:def
