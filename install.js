@@ -55,8 +55,8 @@ const setupTile = function (result) {
     }
     let appNamewithCapitals = {
         files: 'tile/tile.js',
-        from: [/%APPNAME%Tile/g, /%APPNAME%/g],
-        to: [deHyphenatedName + "Tile", capitalisedAppName]
+        from: [/%APPNAME%Tile/g, /%APPNAME%Cap/g, /%APPNAME%/g],
+        to: [deHyphenatedName + "Tile", capitalisedAppName, deHyphenatedName]
     }
     let urbitPierOptions = {
         files: '.urbitrc',
