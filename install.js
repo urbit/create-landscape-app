@@ -44,7 +44,7 @@ prompt.get([{
 
 const setupTile = function (result) {
     deleteFolderRecursive('full')
-    let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
+    let deHyphenatedName = result.appName.replace(/-/g, '')
     fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
     // Make a copy of the name without hyphens for the JS naming.
     let capitalisedAppName = deHyphenatedName.charAt(0).toUpperCase() + deHyphenatedName.slice(1)
@@ -168,7 +168,8 @@ const setupFull = function (result) {
     deleteFolderRecursive('tile')
     deleteFolderRecursive('urbit')
     fs.unlinkSync('gulpfile.js')
-    let deHyphenatedName = result.appName.indexOf('-') > -1 ? result.appName.replace(/-/g, "") : result.appName
+    fs.access('.DS_Store', (err) => { if (!err) fs.unlinkSync('.DS_Store') })
+    let deHyphenatedName = result.appName.replace(/-/g, '')
     moveDir('full', './', function() {
         fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
         fs.renameSync('urbit/app/smol/', 'urbit/app/' + deHyphenatedName)
@@ -188,4 +189,5 @@ const setupFull = function (result) {
         }
         replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
     })
+    console.log("All done! Happy hacking.")
 }
