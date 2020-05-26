@@ -5,6 +5,11 @@ import urbitOb from 'urbit-ob';
 
 
 export class Subscription {
+
+  // uncomment the following code to start up a subscription on the '/' path
+  //
+  // see on-watch in your app's hoon file for behaviour
+  //
   start() {
     if (api.authTokens) {
       // this.initialize%APPNAME%();
@@ -14,7 +19,7 @@ export class Subscription {
   }
 
   // initialize%APPNAME%() {
-  //   api.bind('/primary', 'PUT', api.authTokens.ship, '%APPNAME%',
+  //   api.bind('/', 'PUT', api.authTokens.ship, '%APPNAME%',
   //     this.handleEvent.bind(this),
   //     this.handleError.bind(this));
   // }
@@ -25,7 +30,7 @@ export class Subscription {
 
   handleError(err) {
     console.error(err);
-    api.bind('/primary', 'PUT', api.authTokens.ship, '%APPNAME%',
+    api.bind('/', 'PUT', api.authTokens.ship, '%APPNAME%',
       this.handleEvent.bind(this),
       this.handleError.bind(this));
   }
