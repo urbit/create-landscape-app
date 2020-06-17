@@ -29,7 +29,7 @@ prompt.get([{
     }
 )
 
-// Delete the tile-specific files and move the full application to root. Rename everything as necessary.
+// Migrate application to root directory.
 
 const deleteFolderRecursive = function (path) {
     if (fs.existsSync(path)) {
@@ -137,7 +137,7 @@ const setupFull = function (result) {
         }
         replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
         let appNameOptions = {
-            files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon', 'tile/tile.js',
+            files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
                  'urbit/app/' + deHyphenatedName + '/index.html', 'src/js/components/lib/icons/icon-home.js'
             ],
