@@ -44,10 +44,25 @@ Edit the `.urbitrc` file with the path to your new pier/desk
   ]
 };`
 
+### Do I *need* Hoon?
 
-### What if I want to communicate with my ship / provide more functionality besides a front-end?
+Not anymore! You don't even need this template, if you want to create a pure front-end application. You can tell your ship to mount any path inside Clay to an endpoint, and it will mount all HTML, CSS, JS, and PNGs from that Clay path to the endpoint path:
 
-By default, your app will provide an example of passing state from ship to front-end with the `peer-[yourappname]tile` arm in the app's .hoon file -- in this case, just sending your ship's name as a data prop. The code is well-commented if you don't want to pass state, or if you want to know how to pass almost anything else from your ship to the Landscape interface.
+```
+:file-server &file-server-action [%serve-dir /example-path /app/example %.y]
+```
+
+This command would serve the files inside `/app/example` on your ship at `your-ship.arvo.network/example-path`, and the `%.y` declares that it's public. If you would like to require authentication -- as with the other Landscape applications -- change this to `%.n`.
+
+Likewise, you can add any URL to your Landscape homescreen -- on your ship or not -- with this command in Dojo:
+
+```
+:launch &launch-action [%add %example [[%basic 'example' 'https://example.com/image.png' 'https://example.com'] %.y]]
+```
+
+In this case, `%example` is the name of the application within Launch, `'example'` is the title on the tile itself, `image.png` points to the icon URL for the tile, and `example.com` is where the tile will link to. `%.y` declares that yes, this tile is shown.
+
+### What if I want to communicate with my ship / provide more functionality than what create-landscape-app provides?
 
 In order to do anything substantial, of course, you'll want to know [Hoon](https://urbit.org/docs/tutorials/hoon/). If this is intimidating, don't panic: `create-landscape-app` is a fantastic way to start learning by leveraging your strengths. This repository is intended to be a boilerplate for rapid front-end development; it's also a gradual, incremental introduction to Hoon for web developers by allowing for rapid prototyping and experimentation with the Landscape interface.
 
