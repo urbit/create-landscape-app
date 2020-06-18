@@ -10,7 +10,9 @@ In order to run your application on your ship, you will need Urbit v.0.10.0 or h
 
 ## Using
 
-Once you're up and running, your tile lives in `tile/tile.js`, which uses [React](https://reactjs.org) to render itself -- you'll want a basic foothold with it first. When you make changes, the `urbit` directory will update with the compiled application and, if you're running `npm run serve`, it will automatically copy itself to your Urbit ship when you save your changes (more information on that below).
+Once you're up and running, your application lives in the `src` and `urbit` folders; `src` uses [React](https://reactjs.org) to render itself -- you'll want a basic foothold with it first. The `urbit` directory includes a basic boilerplate for the back-end of the application, running on your Urbit ship.
+
+When you make changes, the `urbit` directory will update with the compiled application and, if you're running `npm run serve`, it will automatically copy itself to your Urbit ship when you save your changes (more information on that below).
 
 ### `npm start`
 
@@ -18,24 +20,15 @@ This runs the wizard. Give it an application name and the location of your Urbit
 
 ### `npm run build`
 
-This builds your application and copies it into your Urbit ship's desk. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
+This builds your application and copies it into your Urbit ship's desk. In your Urbit (v.0.10.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
 
 If this is the first time you're running your application on your Urbit ship, don't forget to `|start %yourapp`.
 
 ### `npm run serve`
 
-Builds the application and copies it into your Urbit ship's desk, watching for changes. In your Urbit (v.0.8.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
+Builds the application and copies it into your Urbit ship's desk, watching for changes. In your Urbit (v.0.10.0 or higher) `|commit %home` (or `%your-desk-name`) to synchronise your changes.
 
 ## FAQ
-
-### What is a "tile" vs. "full" app?
-
-When you run `npm run start`, the wizard will ask you to specify which you want:
-
-- **tile**: A tile that exists on the Landscape launch screen. A pre-existing example is the "Weather" tile or the "Clock" tile in Landscape.
-- **full**: A tile that links to a full-screen application: this means that you will work in both `tile.js` (for the tile interface) and `root.js` (and beyond) in the `src` folder.
-
-No matter which option you specify, the wizard will customise the Hoon boilerplate for you and provide a basic example accordingly.
 
 ### How can I ensure my app fits Landscape design?
 
