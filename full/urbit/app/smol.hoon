@@ -12,7 +12,7 @@
 ::
 ++  on-init
   ^-  (quip card _this)
-  =/  launcha  [%launch-action !>([%add %%APPNAME% [[%basic '%APPNAME%' '' '/~%APPNAME%'] %.y]])]
+  =/  launcha  [%launch-action !>([%add %%APPNAME% [[%basic '%APPNAME%' '/~%APPNAME%/img/tile.png' '/~%APPNAME%'] %.y]])]
   =/  filea  [%file-server-action !>([%serve-dir /'~%APPNAME%' /app/%APPNAME% %.n %.n])]
   :_  this
   :~  [%pass /srv %agent [our.bol %file-server] %poke filea]
