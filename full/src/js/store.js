@@ -1,6 +1,5 @@
-import { InitialReducer } from '/reducers/initial';
-import { UpdateReducer } from '/reducers/update';
-
+import { InitialReducer } from './reducers/initial';
+import { UpdateReducer } from './reducers/update';
 
 class Store {
 

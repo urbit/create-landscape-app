@@ -137,9 +137,9 @@ const setupFull = function (result) {
         }
         replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
         let appNameOptions = {
-            files: ['gulpfile.js', 'urbit/app/' + deHyphenatedName + '.hoon',
+            files: ['webpack.dev.js', 'webpack.prod.js', 'urbit/app/' + deHyphenatedName + '.hoon',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                 'urbit/app/' + deHyphenatedName + '/index.html', 'src/js/components/lib/icons/icon-home.js'
+                 'urbit/app/' + deHyphenatedName + '/index.html'
             ],
             from: /%APPNAME%/g,
             to: deHyphenatedName
