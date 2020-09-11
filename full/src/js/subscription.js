@@ -1,8 +1,5 @@
-import { api } from '/api';
-import { store } from '/store';
-
-import urbitOb from 'urbit-ob';
-
+import { api } from './api';
+import { store } from './store';
 
 export class Subscription {
 
