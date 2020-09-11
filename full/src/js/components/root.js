@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import _ from 'lodash';
-import { HeaderBar } from "./lib/header-bar.js"
+import HeaderBar from "./lib/header-bar.js"
 
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
@@ -39,7 +39,7 @@ export class Root extends Component {
         <HeaderBar/>
         <Route exact path="/~%APPNAME%" render={ () => {
           return (
-            <Box height='100%' p='4' display='flex' flexDirection='column' border={['none', '1px solid']} borderColor="lightGray">
+            <Box height='100%' p='4' display='flex' flexDirection='column' borderWidth={['none', '1px']} borderStyle="solid" borderColor="washedGray">
               <Text fontSize='1'>%APPNAME%</Text>
               <Text pt='3'>Welcome to your Landscape application.</Text>
               <Text pt='3'>To get started, edit <code>src/index.js</code>, <code>tile/tile.js</code> or <code>urbit/app/%APPNAME%.hoon</code> and <code>|commit %home</code> on your Urbit ship to see your changes.</Text>

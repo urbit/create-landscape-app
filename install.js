@@ -139,7 +139,7 @@ const setupFull = function (result) {
         let appNameOptions = {
             files: ['webpack.dev.js', 'webpack.prod.js', 'urbit/app/' + deHyphenatedName + '.hoon',
                 'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                 'urbit/app/' + deHyphenatedName + '/index.html', 'src/js/components/lib/icons/icon-home.js'
+                 'urbit/app/' + deHyphenatedName + '/index.html'
             ],
             from: /%APPNAME%/g,
             to: deHyphenatedName
