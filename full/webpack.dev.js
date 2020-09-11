@@ -36,7 +36,9 @@ let devServer = {
   hot: true,
   port: 9000,
   historyApiFallback: true,
-  writeToDisk: true
+  writeToDisk: (filePath) => {
+    return /index.js$/.test(filePath);
+  }
 };
 
 if(urbitrc.URL) {
