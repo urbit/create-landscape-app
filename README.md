@@ -51,12 +51,12 @@ module.exports = {
 Not necessarily! You don't even need this template, if you want to create a pure front-end application. You can tell your ship to mount any path inside Clay to an endpoint, and it will mount all HTML, CSS, JS, and PNGs from that Clay path to the endpoint path:
 
 ```
-:file-server &file-server-action [%serve-dir /example-path /app/example %.y]
+:file-server &file-server-action [%serve-dir /example-path /app/example %.y %.n]
 ```
 
-This command would serve the files inside `/app/example` on your ship at `your-ship.arvo.network/example-path`, and the `%.y` declares that it's public. If you would like to require authentication -- as with the other Landscape applications -- change this to `%.n`.
+This command would serve the files inside `/app/example` on your ship at `your-ship.arvo.network/example-path`, and the first boolean, `%.y`, declares that it's public. If you would like to require authentication -- as with the other Landscape applications -- change this to `%.n`. The second, `%.n` in this case, declares that this is not part of the Landscape core suite (this affects how file-server routes).
 
-Likewise, you can add any URL to your Landscape homescreen -- on your ship or not -- with this command in Dojo:
+You can also add any URL to your Landscape homescreen -- ie. any URL, regardless of it being hosted on your ship -- with this command in Dojo:
 
 ```
 :launch &launch-action [%add %example [[%basic 'example' 'https://example.com/image.png' 'https://example.com'] %.y]]
@@ -64,7 +64,7 @@ Likewise, you can add any URL to your Landscape homescreen -- on your ship or no
 
 In this case, `%example` is the name of the application within Launch, `'example'` is the title on the tile itself, `image.png` points to the icon URL for the tile, and `example.com` is where the tile will link to. `%.y` declares that yes, this tile is shown.
 
-### What if I want to communicate using my ship?
+### How do I learn to communicate with my ship or write back-end code?
 
 In order to do anything substantial with Gall, see [this guide](https://github.com/timlucmiptev/gall-guide) for pointers.
 
