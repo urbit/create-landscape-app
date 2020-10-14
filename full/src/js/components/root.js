@@ -42,7 +42,7 @@ export class Root extends Component {
             <Box height='100%' p='4' display='flex' flexDirection='column' borderWidth={['none', '1px']} borderStyle="solid" borderColor="washedGray">
               <Text fontSize='1'>%APPNAME%</Text>
               <Text pt='3'>Welcome to your Landscape application.</Text>
-              <Text pt='3'>To get started, edit <code>src/index.js</code>, <code>tile/tile.js</code> or <code>urbit/app/%APPNAME%.hoon</code> and <code>|commit %home</code> on your Urbit ship to see your changes.</Text>
+              <Text pt='3'>To get started, edit <code>src/index.js</code> or <code>urbit/app/%APPNAME%.hoon</code> and <code>|commit %home</code> on your Urbit ship to see your changes.</Text>
               <a className="db f8 pt3" href="https://urbit.org/docs">-> Read the docs</a>
             </Box>
           )}}
