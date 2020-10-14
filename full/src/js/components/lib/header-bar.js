@@ -21,22 +21,7 @@ const HeaderBar = (props) => {
     >
       <Row collapse>
         <StatusBarItem mr={2} onClick={() => window.location.href = '/'}>
-          <img
-            className='invert-d'
-            src='/~landscape/img/icon-home.png'
-            height='11'
-            width='11'
-          />
-        </StatusBarItem>
-        <StatusBarItem
-          onClick={() => window.location.href = '/~groups'}>
-          <img
-            className='invert-d v-mid'
-            src='/~landscape/img/groups.png'
-            height='15'
-            width='15'
-          />
-          <Text display={["none", "inline"]} ml={2}>Groups</Text>
+          <Icon icon='Home' color='black' />
         </StatusBarItem>
       </Row>
       <Row justifyContent="flex-end" collapse>
