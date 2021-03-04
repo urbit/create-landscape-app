@@ -2,6 +2,8 @@ Get started building a simple application for Landscape on your [Urbit](http://u
 
 This tool is experimental and primarily used internally to develop front-end applications. While Tlon does not officially support this tool, you can always get general programming help for Urbit from the Urbit Community group at `~bitbet-bolbel/urbit-community` or the [urbit-dev](https://groups.google.com/a/urbit.org/forum/#!forum/dev) mailing list.
 
+[![awesome urbit badge](https://img.shields.io/badge/~-awesome%20urbit-lightgrey)](https://github.com/urbit/awesome-urbit)
+
 ## Installation
 
 This repository is available as a template; to immediately generate your application's repository you can click [here](https://github.com/urbit/create-landscape-app/generate). Clone the generated repository, `npm install` and then run `npm start` to get started (you can also directly clone this repository, if you wish!).
