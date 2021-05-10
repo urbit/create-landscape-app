@@ -43,7 +43,7 @@
     "css-loader": "^3.5.3",
     "formik": "^2.2.0",
     "fs-extra": "^8.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "markdown-to-jsx": "^7.0.1",
     "moment": "^2.20.1",
     "mousetrap": "^1.6.3",
