@@ -1,0 +1,9 @@
+:~  title+'%APPNAME%'
+    info+'An Urbit app that does great things'
+    color+0x2e.4347
+    glob-http+['https://bootstrap.urbit.org/glob-0v6.ak34j.nao8k.dhqs4.s2atf.td1lc.glob' 0v6.ak34j.nao8k.dhqs4.s2atf.td1lc]
+    base+'%APPSLUG%'
+    version+[0 0 1]
+    website+'https://github.com'
+    license+'MIT'
+==
