@@ -1,139 +1,86 @@
-const path = require('path');
-const fs = require('fs-extra');
-const Promise = require('promise');
-const prompt = require('prompt');
-const replace = require('replace-in-file');
-const slugify = require('slugify');
+const path = require('path')
+const fs = require('fs/promises')
+const mvdir = require('mvdir')
+const prompts = require('prompts')
+const replace = require('replace-in-file')
+const slugify = require('slugify')
 
-// Making the text input a bit legible.
-prompt.colors = false
-prompt.message = ""
+main()
 
-// The text input takes a "result" object and passes it to one of two functions to do the logistics.
-prompt.get(
-  [
+async function main() {
+  const res = await prompts([
     {
-        name: 'appName',
-        required: true,
-        description: "What's the name of your application?",
+      type: 'text',
+      name: 'app',
+      message: 'What should we call your application?'
     },
     {
-        name: 'url',
-        required: true,
-        description: "What URL do you access Urbit at?"
+      type: async prev => (await hasDirectory(getDir(prev))) ? 'text' : null,
+      name: 'dir',
+      message: async prev => `Looks like a directory already exists called "${slugify(prev, { lower: true })}". Where should your app be placed instead?`
+    },
+    {
+      type: 'text',
+      name: 'url',
+      message: "What URL do you use to access Urbit?"
     }
-  ], 
-  (err, result) => setupFull(result)
-)
+  ])
 
-async function setupFull(result) {
-  const slug = slugify(result.appName);
-  
-  await moveDir('full', './')
-
-  replaceWithLogs({
-    files: '.env.local',
-    from: "%URBITURL%",
-    to: result.url
-  })
-  
-  replaceWithLogs({
-    files: [
-      'ui/index.html',
-      'desk/desk.docket-0'
-    ],
-    from: /%APPNAME%/g,
-    to: result.appName
-  })
-
-  replaceWithLogs({
-    files: [
-      'ui/package.json',
-      'desk/desk.docket-0'
-    ],
-    from: /%APPSLUG%/g,
-    to: slug
-  })
-
-  fs.access('.DS_Store', (err) => { if (!err) fs.unlinkSync('.DS_Store') })
-  console.log("All done! Happy hacking.")
-}
-
-async function replaceWithLogs(options) {
-  replace(options)
-    .then(changedFiles => console.log(changedFiles))
-    .catch(err => console.error(err))
-}
-
-async function movePromiser(from, to, records) {
-  await fs.move(from, to)
-  records.push({ from: from, to: to });
-}
-
-async function moveDir(from_dir, to_dir) {
-  const children = await fs.readdir(from_dir);
-  await fs.ensureDir(to_dir);
-  
-  const move_promises = [];
-  const moved_records = [];
-  let child;
-  for (let i_child = 0; i_child < children.length; i_child++) {
-      child = children[i_child];
-      move_promises.push(movePromiser(
-          path.join(from_dir, child),
-          path.join(to_dir, child),
-          moved_records
-      ));
-  }
+  const name = res.app.trim()
+  const slug = slugify(name, { lower: true })
+  const dir = res.dir || path.join('.', slug)
 
   try {
-    await promiseAllWait(move_promises)
-  } catch (err) {
-    let undo_move_promises = [];
-    for (let i_moved_record = 0; i_moved_record < moved_records.length; i_moved_record++) {
-        undo_move_promises.push(fs.move(moved_records[i_moved_record].to, moved_records[i_moved_record].from));
-    }
-
-    await promiseAllWait(undo_move_promises)
-    throw err;
-  }
+    await mvdir('full', dir, { copy: true })
+    await mvdir(path.join(dir, 'ui', '_gitignore'), path.join(dir, 'ui', '.gitignore'))
   
-  await fs.rmdir(from_dir);
+    const prefixPath = p => path.join(dir, p)
+  
+    await replace({
+      files: prefixPath('ui/.env.local'),
+      from: "%URBITURL%",
+      to: res.url
+    })
+    
+    await replace({
+      files: [
+        'README.md',
+        'ui/index.html',
+        'ui/src/app.tsx',
+        'ui/src/assets/manifest.json',
+        'desk/desk.docket-0'
+      ].map(prefixPath),
+      from: /%APPNAME%/g,
+      to: name
+    })
+  
+    await replace({
+      files: [
+        'README.md',
+        'ui/package.json',
+        'ui/vite.config.ts',
+        'desk/desk.docket-0'
+      ].map(prefixPath),
+      from: /%APPSLUG%/g,
+      to: slug
+    })
+
+    console.log("All done! Happy hacking.")
+  } catch (err) {
+    console.log(`Something went wrong when generating your app. You may need to delete the folder at ${dir}`)
+  }
 }
 
-function promiseAllWait(promises) {
-  // this is the same as Promise.all(), except that it will wait for all promises to fulfill before rejecting
-  var all_promises = [];
-  for (var i_promise = 0; i_promise < promises.length; i_promise++) {
-      all_promises.push(
-          promises[i_promise]
-              .then(function (res) {
-                  return { res: res };
-              }).catch(function (err) {
-                  return { err: err };
-              })
-      );
+async function hasDirectory(dir) {
+  try {
+    await fs.access(dir)
+    return true
+  } catch (err) {
+    return false
   }
+}
 
-  return Promise.all(all_promises)
-      .then(function (results) {
-          return new Promise(function (resolve, reject) {
-              var is_failure = false;
-              var i_result;
-              for (i_result = 0; i_result < results.length; i_result++) {
-                  if (results[i_result].err) {
-                      is_failure = true;
-                      break;
-                  } else {
-                      results[i_result] = results[i_result].res;
-                  }
-              }
-
-              if (is_failure) {
-                  reject(results[i_result].err);
-              } else {
-                  resolve(results);
-              }
-          });
-      });
-};
+function getDir(appName) {
+  const slug = slugify(appName, { lower: true })
+  return path.join('.', slug)
+}

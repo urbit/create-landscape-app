@@ -10,13 +10,10 @@
   "license": "MIT",
   "repository": "https://github.com/urbit/create-landscape-app",
   "dependencies": {
-    "fs-extra": "^8.1.0",
-    "mv": "^2.1.1",
-    "promise": "^8.0.3",
-    "prompt": "^1.0.0",
-    "replace-in-file": "^4.1.1"
-  },
-  "devDependencies": {
+    "mvdir": "^1.0.21",
+    "prompts": "^2.4.2",
+    "replace-in-file": "^4.1.1",
     "slugify": "^1.6.1"
-  }
+  },
+  "devDependencies": {}
 }
