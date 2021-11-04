@@ -3,6 +3,7 @@
   "version": "5.0.0",
   "description": "Get started with a Landscape application.",
   "main": "node install.js",
+  "bin": "install.js",
   "scripts": {
     "start": "node install.js"
   },
