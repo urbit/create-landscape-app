@@ -1,150 +1,86 @@
-const prompt = require('prompt')
+const path = require('path')
+const fs = require('fs/promises')
+const mvdir = require('mvdir')
+const prompts = require('prompts')
 const replace = require('replace-in-file')
-const fs = require('fs-extra');
-var Promise = require('promise');
-var path = require('path');
+const slugify = require('slugify')
 
-// Making the text input a bit legible.
+main()
 
-prompt.colors = false
-prompt.message = ""
-
-// The text input takes a "result" object and passes it to one of two functions to do the logistics.
-
-prompt.get([{
-    name: 'appName',
-    required: true,
-    description: "What's the name of your application? Lowercase and no spaces, please.",
-    message: "Lowercase and no spaces, please.",
-    conform: function(value) {
-        return /^[a-z0-9]+((\-[a-z0-9]+){1,})?$/g.test(value)
-    }
+async function main() {
+  const res = await prompts([
+    {
+      type: 'text',
+      name: 'app',
+      message: 'What should we call your application?'
     },
     {
-    name: 'pier',
-    required: true,
-    description: "Where is your Urbit pier's desk located? For example, /Users/dev/zod/home"
-    }], function (err, result) {
-        setupFull(result)
+      type: async prev => (await hasDirectory(getDir(prev))) ? 'text' : null,
+      name: 'dir',
+      message: async prev => `Looks like a directory already exists called "${slugify(prev, { lower: true })}". Where should your app be placed instead?`
+    },
+    {
+      type: 'text',
+      name: 'url',
+      message: "What URL do you use to access Urbit?"
     }
-)
+  ])
 
-// Migrate application to root directory.
+  const name = res.app.trim()
+  const slug = slugify(name, { lower: true })
+  const dir = res.dir || path.join('.', slug)
 
-const deleteFolderRecursive = function (path) {
-    if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function (file, index) {
-            var curPath = path + "/" + file;
-            if (fs.lstatSync(curPath).isDirectory()) {
-                deleteFolderRecursive(curPath);
-            } else {
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(path);
-    }
-};
-
-var promiseAllWait = function (promises) {
-    // this is the same as Promise.all(), except that it will wait for all promises to fulfill before rejecting
-    var all_promises = [];
-    for (var i_promise = 0; i_promise < promises.length; i_promise++) {
-        all_promises.push(
-            promises[i_promise]
-                .then(function (res) {
-                    return { res: res };
-                }).catch(function (err) {
-                    return { err: err };
-                })
-        );
-    }
-
-    return Promise.all(all_promises)
-        .then(function (results) {
-            return new Promise(function (resolve, reject) {
-                var is_failure = false;
-                var i_result;
-                for (i_result = 0; i_result < results.length; i_result++) {
-                    if (results[i_result].err) {
-                        is_failure = true;
-                        break;
-                    } else {
-                        results[i_result] = results[i_result].res;
-                    }
-                }
-
-                if (is_failure) {
-                    reject(results[i_result].err);
-                } else {
-                    resolve(results);
-                }
-            });
-        });
-};
-
-var movePromiser = function (from, to, records) {
-    return fs.move(from, to)
-        .then(function () {
-            records.push({ from: from, to: to });
-        });
-};
-
-var moveDir = function (from_dir, to_dir, callback) {
-    return fs.readdir(from_dir)
-        .then(function (children) {
-            return fs.ensureDir(to_dir)
-                .then(function () {
-                    var move_promises = [];
-                    var moved_records = [];
-                    var child;
-                    for (var i_child = 0; i_child < children.length; i_child++) {
-                        child = children[i_child];
-                        move_promises.push(movePromiser(
-                            path.join(from_dir, child),
-                            path.join(to_dir, child),
-                            moved_records
-                        ));
-                    }
-
-                    return promiseAllWait(move_promises)
-                        .catch(function (err) {
-                            var undo_move_promises = [];
-                            for (var i_moved_record = 0; i_moved_record < moved_records.length; i_moved_record++) {
-                                undo_move_promises.push(fs.move(moved_records[i_moved_record].to, moved_records[i_moved_record].from));
-                            }
-
-                            return promiseAllWait(undo_move_promises)
-                                .then(function () {
-                                    throw err;
-                                });
-                        });
-                }).then(function () {
-                    return fs.rmdir(from_dir);
-                });
-        }).then(callback);
-};
-
-const setupFull = function (result) {
-    fs.access('.DS_Store', (err) => { if (!err) fs.unlinkSync('.DS_Store') })
-    let deHyphenatedName = result.appName.replace(/-/g, '')
-    moveDir('full', './', function() {
-        fs.renameSync('urbit/app/smol.hoon', 'urbit/app/' + deHyphenatedName + '.hoon')
-        fs.renameSync('urbit/app/smol/', 'urbit/app/' + deHyphenatedName)
-        let urbitPierOptions = {
-            files: '.urbitrc',
-            from: "%URBITPIER%",
-            to: result.pier
-        }
-        replace(urbitPierOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
-        let appNameOptions = {
-            files: ['webpack.dev.js', 'webpack.prod.js', 'urbit/app/' + deHyphenatedName + '.hoon',
-                'src/js/api.js', 'src/js/subscription.js', 'src/js/components/root.js',
-                 'urbit/app/' + deHyphenatedName + '/index.html'
-            ],
-            from: /%APPNAME%/g,
-            to: deHyphenatedName
-        }
-        replace(appNameOptions).then(changedFiles => console.log(changedFiles)).catch(err => console.error(err))
+  try {
+    await mvdir('full', dir, { copy: true })
+    await mvdir(path.join(dir, 'ui', '_gitignore'), path.join(dir, 'ui', '.gitignore'))
+  
+    const prefixPath = p => path.join(dir, p)
+  
+    await replace({
+      files: prefixPath('ui/.env.local'),
+      from: "%URBITURL%",
+      to: res.url
     })
+    
+    await replace({
+      files: [
+        'README.md',
+        'ui/index.html',
+        'ui/src/app.tsx',
+        'ui/src/assets/manifest.json',
+        'desk/desk.docket-0'
+      ].map(prefixPath),
+      from: /%APPNAME%/g,
+      to: name
+    })
+  
+    await replace({
+      files: [
+        'README.md',
+        'ui/package.json',
+        'ui/vite.config.ts',
+        'desk/desk.docket-0'
+      ].map(prefixPath),
+      from: /%APPSLUG%/g,
+      to: slug
+    })
+
     console.log("All done! Happy hacking.")
+  } catch (err) {
+    console.log(`Something went wrong when generating your app. You may need to delete the folder at ${dir}`)
+  }
+}
+
+async function hasDirectory(dir) {
+  try {
+    await fs.access(dir)
+    return true
+  } catch (err) {
+    return false
+  }
+}
+
+function getDir(appName) {
+  const slug = slugify(appName, { lower: true })
+  return path.join('.', slug)
 }
