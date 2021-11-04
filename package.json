@@ -1,6 +1,6 @@
 {
   "name": "@urbit/create-landscape-app",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Get started with a Landscape application.",
   "main": "node install.js",
   "bin": "install.js",

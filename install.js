@@ -33,7 +33,7 @@ async function main() {
   const dir = res.dir || path.join('.', slug)
 
   try {
-    await mvdir('full', dir, { copy: true })
+    await mvdir(path.join(__dirname, 'full'), dir, { copy: true })
     await mvdir(path.join(dir, 'ui', '_gitignore'), path.join(dir, 'ui', '.gitignore'))
   
     const prefixPath = p => path.join(dir, p)
@@ -67,7 +67,8 @@ async function main() {
       to: slug
     })
 
-    console.log("All done! Happy hacking.")
+    console.log(`All done, switch to the "${res.dir || slug}" directory to get started.`)
+    console.log("Happy hacking!")
   } catch (err) {
     console.log(`Something went wrong when generating your app. You may need to delete the folder at ${dir}`)
   }
