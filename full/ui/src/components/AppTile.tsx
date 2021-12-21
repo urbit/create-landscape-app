@@ -5,7 +5,12 @@ function normalizeUrbitColor(color: string): string {
   if (color.startsWith('#')) {
     return color;
   }
-  return `#${color.slice(2).replace('.', '').toUpperCase()}`;
+  var colbytes:string = `${color.slice(2).replace('.', '').toUpperCase()}`;
+
+  while(colbytes.length < 6) {
+    colbytes = "0" + colbytes;
+  }
+  return "#" + colbytes;
 }
 
 export const AppTile = ({ image, color }: Charge) => {
