@@ -14,9 +14,9 @@ Once it's done open the `README.md` in that directory to get started.
 
 We're currently working on Indigo v2 and hope to release it soon as an NPM package that you can use in your app.
 
-### Nothing shows up when I go to `https://localhost:3000/apps/{my-app}`.
+### Nothing shows up when I go to `http://localhost:3000/apps/{my-app}`.
 
-You may need to navigate to directly to `https://localhost:3000` first to login.
+You may need to navigate to directly to `http://localhost:3000` first to login.
 
 ### How do I develop on a different ship?
 
