@@ -16,6 +16,22 @@ To get started using %APPNAME% first you need to run `npm install` inside the `u
 
 To develop you'll need a running ship to point to. To do so you first need to add a `.env.local` file to the `ui` directory. This file will not be committed. Adding `VITE_SHIP_URL={URL}` where **{URL}** is the URL of the ship you would like to point to, will allow you to run `npm run dev`. This will proxy all requests to the ship except for those powering the interface, allowing you to see live data.
 
+Your browser may require CORS requests to be enabled for the use of `@urbit/http-api`. The following commands will add `http://localhost:3000` to the CORS registry of your ship
+
+```bash
+~zod:dojo> +cors-registry
+
+[requests={~~http~3a.~2f.~2f.localhost ~~http~3a.~2f.~2f.localhost~3a.3000} approved={} rejected={}]
+
+~zod:dojo> |cors-approve ~~http~3a.~2f.~2f.localhost~3a.3000 
+
+~zod:dojo> +cors-registry
+
+[requests={~~http~3a.~2f.~2f.localhost} approved={~~http~3a.~2f.~2f.localhost~3a.3000} rejected={}]
+
+~your-sig:dojo>
+```
+
 Regardless of what you run to develop, Vite will hot-reload code changes as you work so you don't have to constantly refresh.
 
 ### Deploying
