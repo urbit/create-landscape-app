@@ -38,6 +38,6 @@ But if this is intimidating, don't panic: `create-landscape-app` is a fantastic 
 
 ## Further Information
 
-You can always get general programming help for Urbit from the [Urbit Community (~bitbet-bolbel/urbit-community)](web+urbitgraph://group/~bitbet-bolbel/urbit-community), the [Forge (~middev/the-forge)](web+urbitgraph://group/~middev/the-forge) or the [urbit-dev](https://groups.google.com/a/urbit.org/forum/#!forum/dev) mailing list.
+You can always get general programming help for Urbit from the [Urbit Community (~bitbet-bolbel/urbit-community)](https://urbit.org/groups/~bitbet-bolbel/urbit-community), the [Forge (~middev/the-forge)](https://urbit.org/groups/~middev/the-forge) or the [urbit-dev](https://groups.google.com/a/urbit.org/forum/#!forum/dev) mailing list.
 
 Happy hacking!
