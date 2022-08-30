@@ -6,6 +6,8 @@ Get started building a simple application for Landscape on your [Urbit](http://u
 
 Simply run `npx @urbit/create-landscape-app` and follow the prompts, this will create a new folder with your application.
 
+If you'd like to build your application in TypeScript, run `npx @urbit/create-landscape-app --typescript`.
+
 Once it's done open the `README.md` in that directory to get started.
 
 ## FAQ
