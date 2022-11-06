@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const path = require("path");
-const fs = require("fs/promises");
+const fs = require('fs').promises;
 const mvdir = require("mvdir");
 const prompts = require("prompts");
 const replace = require("replace-in-file");
@@ -10,7 +10,7 @@ const slugify = require("slugify");
 main();
 
 async function main() {
-  const ts = Boolean(process.argv?.[2] === "--typescript");
+  const ts = Boolean(process.argv.includes("--typescript"));
   const codebase = ts ? "ts" : "js";
   const res = await prompts([
     {
