@@ -1,6 +1,6 @@
 import { loadEnv, defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import { urbitPlugin } from '@urbit/vite-plugin-urbit';
+import { urbitPlugin } from '@holium/vite-plugin-urbit';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
